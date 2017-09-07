@@ -1,0 +1,444 @@
+2017-08-28 13:48:34:317 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017/8/28 13:48:37 软件异常
+System.Threading.ThreadExceptionEventArgs
+2017-08-28 13:48:49:035 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:48:52:233 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:48:55:238 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:48:58:241 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:01:067 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:04:077 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:04:091 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:49:05:105 天线控制器已检测断开，正在重连
+2017-08-28 13:49:06:179 激光控制器已检测断开，正在重连
+2017-08-28 13:49:07:093 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:10:099 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:13:112 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:16:122 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:19:132 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:19:135 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:49:19:226 天线控制器已检测断开，正在重连
+2017-08-28 13:49:20:259 激光控制器已检测断开，正在重连
+2017-08-28 13:49:22:142 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:25:152 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:28:165 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:31:175 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:33:345 天线控制器已检测断开，正在重连
+2017-08-28 13:49:34:187 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:34:359 激光控制器已检测断开，正在重连
+2017-08-28 13:49:37:196 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:40:208 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:43:222 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:46:232 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:47:413 天线控制器已检测断开，正在重连
+2017-08-28 13:49:48:432 激光控制器已检测断开，正在重连
+2017-08-28 13:49:49:240 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:52:252 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:55:262 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:49:58:274 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:01:284 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:04:293 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:04:295 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:50:04:515 天线控制器已检测断开，正在重连
+2017-08-28 13:50:05:526 激光控制器已检测断开，正在重连
+2017-08-28 13:50:07:304 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:10:316 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:13:325 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:16:338 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:18:563 天线控制器已检测断开，正在重连
+2017-08-28 13:50:19:350 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:19:574 激光控制器已检测断开，正在重连
+2017-08-28 13:50:22:360 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:25:370 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:28:379 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:31:390 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:32:624 天线控制器已检测断开，正在重连
+2017-08-28 13:50:33:650 激光控制器已检测断开，正在重连
+2017-08-28 13:50:34:403 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:37:428 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:40:425 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:43:433 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:46:446 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:49:455 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:49:456 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:50:49:721 天线控制器已检测断开，正在重连
+2017-08-28 13:50:50:733 激光控制器已检测断开，正在重连
+2017-08-28 13:50:52:467 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:55:478 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:50:58:492 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:01:500 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:03:773 天线控制器已检测断开，正在重连
+2017-08-28 13:51:04:509 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:04:796 激光控制器已检测断开，正在重连
+2017-08-28 13:51:07:521 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:10:534 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:13:543 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:16:553 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:17:822 天线控制器已检测断开，正在重连
+2017-08-28 13:51:18:846 激光控制器已检测断开，正在重连
+2017-08-28 13:51:19:563 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:22:575 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:25:586 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:28:597 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:31:611 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:34:619 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:34:622 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:51:34:875 天线控制器已检测断开，正在重连
+2017-08-28 13:51:35:884 激光控制器已检测断开，正在重连
+2017-08-28 13:51:37:628 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:40:640 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:43:651 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:46:679 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:48:925 天线控制器已检测断开，正在重连
+2017-08-28 13:51:49:673 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:49:946 激光控制器已检测断开，正在重连
+2017-08-28 13:51:52:684 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:55:693 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:51:58:704 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:01:717 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:02:971 天线控制器已检测断开，正在重连
+2017-08-28 13:52:03:990 激光控制器已检测断开，正在重连
+2017-08-28 13:52:04:727 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:07:738 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:10:748 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:13:761 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:16:770 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:19:785 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:19:787 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:52:20:045 天线控制器已检测断开，正在重连
+2017-08-28 13:52:21:092 激光控制器已检测断开，正在重连
+2017-08-28 13:52:22:794 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:25:802 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:28:815 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:31:823 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:34:119 天线控制器已检测断开，正在重连
+2017-08-28 13:52:34:835 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:35:143 激光控制器已检测断开，正在重连
+2017-08-28 13:52:37:847 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:40:859 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:43:869 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:46:880 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:48:186 天线控制器已检测断开，正在重连
+2017-08-28 13:52:49:209 激光控制器已检测断开，正在重连
+2017-08-28 13:52:49:887 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:52:899 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:55:914 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:52:58:922 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:01:933 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:04:943 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:04:943 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:53:05:252 天线控制器已检测断开，正在重连
+2017-08-28 13:53:06:269 激光控制器已检测断开，正在重连
+2017-08-28 13:53:07:954 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:10:964 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:13:979 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:16:988 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:19:292 天线控制器已检测断开，正在重连
+2017-08-28 13:53:19:997 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:20:313 激光控制器已检测断开，正在重连
+2017-08-28 13:53:23:015 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:26:019 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:29:030 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:32:044 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:33:358 天线控制器已检测断开，正在重连
+2017-08-28 13:53:34:389 激光控制器已检测断开，正在重连
+2017-08-28 13:53:35:051 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:38:063 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:41:074 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:44:085 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:47:099 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:50:105 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:50:107 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:53:50:432 天线控制器已检测断开，正在重连
+2017-08-28 13:53:51:458 激光控制器已检测断开，正在重连
+2017-08-28 13:53:53:115 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:56:127 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:53:59:138 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:02:149 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:04:491 天线控制器已检测断开，正在重连
+2017-08-28 13:54:05:159 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:05:517 激光控制器已检测断开，正在重连
+2017-08-28 13:54:08:170 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:11:184 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:14:192 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:17:201 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:18:577 天线控制器已检测断开，正在重连
+2017-08-28 13:54:19:602 激光控制器已检测断开，正在重连
+2017-08-28 13:54:20:214 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:23:226 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:26:235 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:29:248 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:32:258 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:35:266 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:35:268 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:54:35:664 天线控制器已检测断开，正在重连
+2017-08-28 13:54:37:254 激光控制器已检测断开，正在重连
+2017-08-28 13:54:38:281 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:41:289 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:44:300 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:47:311 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:50:323 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:50:324 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:54:50:333 天线控制器已检测断开，正在重连
+2017-08-28 13:54:51:355 激光控制器已检测断开，正在重连
+2017-08-28 13:54:53:332 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:56:347 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:54:59:354 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:02:365 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:04:418 天线控制器已检测断开，正在重连
+2017-08-28 13:55:05:377 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:05:476 激光控制器已检测断开，正在重连
+2017-08-28 13:55:08:385 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:11:398 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:14:416 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:17:423 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:18:522 天线控制器已检测断开，正在重连
+2017-08-28 13:55:19:548 激光控制器已检测断开，正在重连
+2017-08-28 13:55:20:431 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:23:444 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:26:452 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:29:462 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:32:478 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:35:485 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:35:487 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:55:35:608 天线控制器已检测断开，正在重连
+2017-08-28 13:55:36:621 激光控制器已检测断开，正在重连
+2017-08-28 13:55:38:497 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:41:506 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:44:516 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:47:528 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:49:662 天线控制器已检测断开，正在重连
+2017-08-28 13:55:50:541 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:50:695 激光控制器已检测断开，正在重连
+2017-08-28 13:55:53:552 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:56:559 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:55:59:575 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:02:582 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:03:730 天线控制器已检测断开，正在重连
+2017-08-28 13:56:04:782 激光控制器已检测断开，正在重连
+2017-08-28 13:56:05:593 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:08:604 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:11:615 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:14:626 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:17:639 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:20:649 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:20:651 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-28 13:56:20:847 天线控制器已检测断开，正在重连
+2017-08-28 13:56:21:863 激光控制器已检测断开，正在重连
+2017-08-28 13:56:23:658 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:26:667 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:29:678 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:32:690 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:34:899 天线控制器已检测断开，正在重连
+2017-08-28 13:56:35:699 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:35:936 激光控制器已检测断开，正在重连
+2017-08-28 13:56:38:710 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:41:721 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:44:735 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:47:744 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 13:56:48:966 天线控制器已检测断开，正在重连
+2017-08-28 13:56:49:974 激光控制器已检测断开，正在重连
+2017-08-28 14:03:33:991 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017/8/28 14:03:35 软件异常
+System.Threading.ThreadExceptionEventArgs
+2017-08-28 14:04:26:958 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 14:04:29:958 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 14:04:33:125 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017/8/28 14:04:35 软件异常
+System.Threading.ThreadExceptionEventArgs
+2017-08-28 14:31:41:960 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 14:31:44:959 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-28 14:31:59:121 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017/8/28 14:32:14 软件异常
+System.Threading.ThreadExceptionEventArgs

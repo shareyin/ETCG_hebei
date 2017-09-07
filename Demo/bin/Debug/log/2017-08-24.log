@@ -1,0 +1,19 @@
+2017-08-24 09:33:23:000 天线控制器已检测断开，正在重连
+2017-08-24 09:33:23:031 激光控制器已检测断开，正在重连
+2017-08-24 12:44:03:121 天线控制器已检测断开，正在重连
+2017-08-24 12:44:03:127 激光控制器已检测断开，正在重连
+2017-08-24 12:47:37:041 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-24 12:47:37:045 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-24 16:32:22:122 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-24 16:32:22:123 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-24 16:33:05:378 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-24 16:33:05:440 天线控制器已检测断开，正在重连
+2017-08-24 16:33:05:447 激光控制器已检测断开，正在重连
+2017-08-24 16:33:05:395 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492

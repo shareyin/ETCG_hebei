@@ -1,0 +1,34 @@
+2017-08-30 13:30:44:357 激光控制器已检测断开，正在重连
+2017-08-30 13:30:47:372 天线控制器已检测断开，正在重连
+2017-08-30 13:58:31:653 172.18.212.19:5004Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 您的主机中的软件中止了一个已建立的连接。。 ---> System.Net.Sockets.SocketException: 您的主机中的软件中止了一个已建立的连接。
+   在 System.Net.Sockets.Socket.BeginReceive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags, AsyncCallback callback, Object state)
+   在 System.Net.Sockets.NetworkStream.BeginRead(Byte[] buffer, Int32 offset, Int32 size, AsyncCallback callback, Object state)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.BeginRead(Byte[] buffer, Int32 offset, Int32 size, AsyncCallback callback, Object state)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 560
+2017-08-30 13:58:32:683 Socket建立连接异常 172.18.212.19:5004
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 172.18.212.19:5004
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 527
+2017-08-30 13:58:32:685 激光Socket异常 已自动恢复连接
+2017-08-30 13:58:34:296 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 由于以前的关闭调用，套接字在那个方向已经关闭，发送或接收数据的请求没有被接受。。 ---> System.Net.Sockets.SocketException: 由于以前的关闭调用，套接字在那个方向已经关闭，发送或接收数据的请求没有被接受。
+   在 System.Net.Sockets.Socket.BeginReceive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags, AsyncCallback callback, Object state)
+   在 System.Net.Sockets.NetworkStream.BeginRead(Byte[] buffer, Int32 offset, Int32 size, AsyncCallback callback, Object state)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.BeginRead(Byte[] buffer, Int32 offset, Int32 size, AsyncCallback callback, Object state)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 560
+2017-08-30 13:58:34:297 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-30 13:58:35:313 Socket建立连接异常 172.18.212.19:8080
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 172.18.212.19:8080
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 527
+2017-08-30 13:58:35:314 天线Socket异常 已自动恢复连接
+2017/8/30 13:58:35 软件异常
+System.Threading.ThreadExceptionEventArgs

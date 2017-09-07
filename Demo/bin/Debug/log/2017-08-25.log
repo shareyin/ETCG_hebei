@@ -1,0 +1,233 @@
+2017-08-25 10:29:51:539 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:29:51:594 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:29:51:600 天线Socket异常 已自动恢复连接
+2017-08-25 10:29:53:865 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-25 10:29:53:867 Socket异常
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.SendByteData(Byte[] SendByteData, Int32 Slen) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 492
+2017-08-25 10:29:54:012 激光控制器已检测断开，正在重连
+2017-08-25 10:30:05:919 172.18.212.19:5004Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:30:05:921 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:30:05:925 激光Socket异常 已自动恢复连接
+2017-08-25 10:30:06:053 天线控制器已检测断开，正在重连
+2017-08-25 10:30:21:085 天线控制器已检测断开，正在重连
+2017-08-25 10:30:21:092 激光控制器已检测断开，正在重连
+2017-08-25 10:30:36:138 天线控制器已检测断开，正在重连
+2017-08-25 10:30:36:158 激光控制器已检测断开，正在重连
+2017-08-25 10:30:51:192 天线控制器已检测断开，正在重连
+2017-08-25 10:30:51:199 激光控制器已检测断开，正在重连
+2017-08-25 10:31:06:152 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:31:06:153 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:31:06:158 天线Socket异常 已自动恢复连接
+2017-08-25 10:31:06:230 激光控制器已检测断开，正在重连
+2017-08-25 10:31:21:258 天线控制器已检测断开，正在重连
+2017-08-25 10:31:21:267 激光控制器已检测断开，正在重连
+2017-08-25 10:31:36:305 天线控制器已检测断开，正在重连
+2017-08-25 10:31:36:315 激光控制器已检测断开，正在重连
+2017-08-25 10:31:51:343 天线控制器已检测断开，正在重连
+2017-08-25 10:31:51:358 激光控制器已检测断开，正在重连
+2017-08-25 10:32:06:395 天线控制器已检测断开，正在重连
+2017-08-25 10:32:06:426 激光控制器已检测断开，正在重连
+2017-08-25 10:32:21:446 天线控制器已检测断开，正在重连
+2017-08-25 10:32:21:459 激光控制器已检测断开，正在重连
+2017-08-25 10:32:36:483 天线控制器已检测断开，正在重连
+2017-08-25 10:32:36:491 激光控制器已检测断开，正在重连
+2017-08-25 10:32:51:527 激光控制器已检测断开，正在重连
+2017-08-25 10:32:51:528 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:32:51:530 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:32:51:533 天线Socket异常 已自动恢复连接
+2017-08-25 10:33:09:566 天线控制器已检测断开，正在重连
+2017-08-25 10:33:09:573 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-08-25 10:33:09:581 激光控制器已检测断开，正在重连
+2017-08-25 10:33:24:608 天线控制器已检测断开，正在重连
+2017-08-25 10:33:24:612 激光控制器已检测断开，正在重连
+2017-08-25 10:33:25:060 172.18.212.19:5004Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:33:25:062 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:33:25:062 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:33:25:063 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:33:25:081 天线Socket异常 已自动恢复连接
+2017-08-25 10:33:25:125 激光Socket异常 已自动恢复连接
+2017/8/25 10:33:25 软件异常
+System.Threading.ThreadExceptionEventArgs
+2017-08-25 10:33:54:179 天线控制器已检测断开，正在重连
+2017-08-25 10:33:54:192 激光控制器已检测断开，正在重连
+2017-08-25 10:34:00:598 172.18.212.19:5004Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:34:00:603 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:34:00:603 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:34:00:604 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:34:00:606 天线Socket异常 已自动恢复连接
+2017-08-25 10:34:00:635 激光Socket异常 已自动恢复连接
+2017/8/25 10:34:00 软件异常
+System.Threading.ThreadExceptionEventArgs
+2017-08-25 10:47:32:917 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:47:32:922 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:47:32:942 天线Socket异常 已自动恢复连接
+2017-08-25 10:47:35:895 激光控制器已检测断开，正在重连
+2017-08-25 10:49:34:064 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:49:34:068 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:49:34:072 天线Socket异常 已自动恢复连接
+2017-08-25 10:49:36:830 激光控制器已检测断开，正在重连
+2017-08-25 10:49:49:093 172.18.212.19:5004Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:49:49:094 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:49:49:097 激光Socket异常 已自动恢复连接
+2017-08-25 10:49:49:110 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 10:49:49:111 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 10:49:49:113 天线Socket异常 已自动恢复连接
+2017-08-25 10:50:06:893 天线控制器已检测断开，正在重连
+2017-08-25 10:50:06:909 激光控制器已检测断开，正在重连
+2017-08-25 11:10:20:468 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 11:10:20:473 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 11:10:20:477 天线Socket异常 已自动恢复连接
+2017-08-25 11:10:23:227 激光控制器已检测断开，正在重连
+2017-08-25 11:10:35:963 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 11:10:35:964 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 11:12:49:873 172.18.212.19:8080Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。。 ---> System.ObjectDisposedException: 无法访问已释放的对象。
+对象名:“System.Net.Sockets.Socket”。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\Demo\SocketHelper.cs:行号 556
+2017-08-25 11:12:49:878 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-08-25 11:12:49:880 天线Socket异常 已自动恢复连接
+2017-08-25 11:12:52:658 激光控制器已检测断开，正在重连
+2017-08-25 11:14:42:570 天线控制器已检测断开，正在重连
+2017-08-25 11:14:42:576 激光控制器已检测断开，正在重连
