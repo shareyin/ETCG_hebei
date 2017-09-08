@@ -79,3 +79,11 @@ E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\ControlExs\obj\x86\Debug\Contr
 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\ControlExs\bin\Debug\ControlExs.dll
 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\ControlExs\bin\Debug\ControlExs.pdb
 E:\Program\ETCG武汉\修正（心跳）\ETCGDemo\ControlExs\obj\x86\Debug\ControlExs.dll
+E:\GitHubHome\ETCG_hebei\ControlExs\bin\Debug\ControlExs.dll
+E:\GitHubHome\ETCG_hebei\ControlExs\bin\Debug\ControlExs.pdb
+E:\GitHubHome\ETCG_hebei\ControlExs\obj\x86\Debug\ControlExs.FormEx.resources
+E:\GitHubHome\ETCG_hebei\ControlExs\obj\x86\Debug\ControlExs.QQMessageBox.resources
+E:\GitHubHome\ETCG_hebei\ControlExs\obj\x86\Debug\ControlExs.Properties.Resources.resources
+E:\GitHubHome\ETCG_hebei\ControlExs\obj\x86\Debug\ControlExs.csproj.GenerateResource.Cache
+E:\GitHubHome\ETCG_hebei\ControlExs\obj\x86\Debug\ControlExs.dll
+E:\GitHubHome\ETCG_hebei\ControlExs\obj\x86\Debug\ControlExs.pdb

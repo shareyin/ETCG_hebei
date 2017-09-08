@@ -59,3 +59,15 @@ E:\Program\ETCG河北\ETCGDemo-5dd64dc44d5afb4e643412cb76a88b61411cb41d\ETCGDemo
 E:\Program\ETCG河北\ETCGDemo-5dd64dc44d5afb4e643412cb76a88b61411cb41d\ETCGDemo-5dd64dc44d5afb4e643412cb76a88b61411cb41d\Demo\obj\x86\Debug\ETCF.myButtonCheck.resources
 E:\Program\ETCG河北\ETCGDemo-5dd64dc44d5afb4e643412cb76a88b61411cb41d\ETCGDemo-5dd64dc44d5afb4e643412cb76a88b61411cb41d\Demo\obj\x86\Debug\ETCF.Properties.Resources.resources
 E:\Program\ETCG河北\ETCGDemo-5dd64dc44d5afb4e643412cb76a88b61411cb41d\ETCGDemo-5dd64dc44d5afb4e643412cb76a88b61411cb41d\Demo\obj\x86\Debug\ETCF.csproj.GenerateResource.Cache
+E:\GitHubHome\ETCG_hebei\Demo\bin\Debug\Demo.exe.config
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\Demo.exe
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\Demo.pdb
+E:\GitHubHome\ETCG_hebei\Demo\bin\Debug\Demo.exe
+E:\GitHubHome\ETCG_hebei\Demo\bin\Debug\Demo.pdb
+E:\GitHubHome\ETCG_hebei\Demo\bin\Debug\ControlExs.dll
+E:\GitHubHome\ETCG_hebei\Demo\bin\Debug\ControlExs.pdb
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.csprojResolveAssemblyReference.cache
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.FormDemo.resources
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.myButtonCheck.resources
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.Properties.Resources.resources
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.csproj.GenerateResource.Cache

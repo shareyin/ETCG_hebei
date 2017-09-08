@@ -101,6 +101,7 @@ namespace ETCF
                  else
                      storePic(datajpg2, bstrIP, bstrNumber, false, nCapTime, null, "");
              }
+             GetVehicleLogoRecog = vbrResult.szLogName;
              MF.AddOperLogCacheStr("摄像机车牌：" + GetPlateNo);
              MF.CameraPicture.Set();
 

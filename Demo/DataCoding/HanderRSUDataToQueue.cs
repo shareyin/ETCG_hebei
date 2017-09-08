@@ -53,10 +53,8 @@ namespace ETCF
             }
             m_qRSU.qOBUBiao = Encoding.GetEncoding("GB2312").GetString(HexStringToByteArray(m_qRSU.qOBUBiao));
             m_qRSU.qOBUDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff");
-            g_lUnixTime = GetUnixTime();
-            m_qRSU.qRSURandCode = g_lUnixTime;
-            //SendLocation((ushort)(databuff[8 + st] << 8 | databuff[9 + st]), m_qRSU.qRSURandCode);
-            //SendLocation(0xfdfd, m_qRSU.qRSURandCode);
+            //g_lUnixTime = GetUnixTime();
+            //m_qRSU.qRSURandCode = g_lUnixTime;
             switch (databuff[24 + st])
             {
                 case 1:

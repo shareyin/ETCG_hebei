@@ -15,6 +15,7 @@ using System.Data.SqlClient;
 using System.Net.Sockets;
 using System.Drawing.Text;
 using LayeredSkin.DirectUI;
+using System.IO.Ports;
 
 namespace ETCF
 {
@@ -168,20 +169,6 @@ namespace ETCF
         private string HKCameraPassword;
 
         private string ComCameraip;
-        //摄像机相关参数
-        
-        //private Int32 m_lUserID = -1;
-        //private CHCNetSDK.MSGCallBack m_falarmData = null;
-        //private int iDeviceNumber = 0; //添加设备个数
-        //private uint iLastErr = 0;
-        //private string strErr;
-        //private Int32 m_lAlarmHandle;
-        //private Int32 iListenHandle = -1;
-        //public string GetPlateNo = "未检测";
-        //public string imagepath = "未知";
-        //public string GetVehicleLogoRecog = "";
-        //public volatile bool HKConnState = false;
-        //HKCamera HKCameraInterface = new HKCamera(this);
         public ManualResetEvent CameraPicture = new ManualResetEvent(false);
         public ManualResetEvent CameraCanpost = new ManualResetEvent(false);
         #endregion
@@ -230,9 +217,6 @@ namespace ETCF
 
             GetPrivateProfileString("SoftFunction", "OpenLocation", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
             OpenLocationPipei = temp.ToString();
-
-
-
         }
         private void btnReadConfig_Click(object sender, EventArgs e)
         {
@@ -493,7 +477,7 @@ namespace ETCF
             DelegateState.InsertGridview = InsertGridview;
         }
         //添加表格文本
-        private void adddataGridViewRoll(string s_Id, string s_JgCarType, string s_RsuCarType, string s_RsuTradeTime, string s_JgTime, string s_RsuPlateNum, string s_CamPlateNum, string s_RsuPlateColor, string s_CamPlateColor, string s_Cambiao, string s_JgId, string s_JgLength, string s_JgWide, string s_CamPicPath)
+        public void adddataGridViewRoll(string s_Id, string s_JgCarType, string s_RsuCarType, string s_RsuTradeTime, string s_JgTime, string s_RsuPlateNum, string s_CamPlateNum, string s_RsuPlateColor, string s_CamPlateColor, string s_Cambiao, string s_JgId, string s_JgLength, string s_JgWide, string s_CamPicPath)
         {
             try
             {
@@ -691,7 +675,7 @@ namespace ETCF
         //更新UI显示日志
         public void WriteOperLogDeleFun(string log)
         {
-            if (this.controltext.Text.Length > 102400)
+            if (this.controltext.Text.Length > 10240)
             {
                 this.controltext.Text = log;
             }
@@ -714,7 +698,7 @@ namespace ETCF
         {
             try
             {
-                this.Invoke(new ThreadStart(delegate
+                this.BeginInvoke(new ThreadStart(delegate
                 {
                     //OBU车牌号
                     this.labelOBUPlateNum.Text = s_OBUPlateNum;
@@ -788,7 +772,7 @@ namespace ETCF
         #endregion
 
         #region    ******RSU建立连接******
-        SocketHelper.TcpClients RSUTcpClient;
+        public SocketHelper.TcpClients RSUTcpClient;
         public void RSUConnect(string s_Rsuip, string s_Rsuport)
         {
             RSUTcpClient.InitSocket(s_Rsuip, Convert.ToInt32(s_Rsuport));
@@ -807,7 +791,6 @@ namespace ETCF
             {
                 if (sks.ex != null)
                 {
-                    //MessageBox.Show(sks.ex.Message);
                     Log.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " " + sks.Ip + "Socket异常\r\n" + sks.ex.ToString() + "\r\n");
                     string RSUIpPort = RSUip +":"+ RSUport;
                     string JGIpPort = JGip + ":"+JGport;
@@ -841,9 +824,10 @@ namespace ETCF
                     }
                     else
                     {
+                        //写日志放后面去
                         if (sks.RecBuffer[3] != 0xD9 && sks.RecBuffer[3] != 0x9D)
                         {
-                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " " + sks.Ip + " 接收数据帧命令:" + sks.RecBuffer[3].ToString("X2") + " Offset长度：" + sks.Offset.ToString() + "\r\n");
+                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " " + sks.Ip + " 接收数据帧命令:" + sks.RecBuffer[3].ToString("X2") + " 帧序号:" + sks.RecBuffer[2].ToString("X2") + " Offset长度：" + sks.Offset.ToString() + "\r\n");
                         }
                         Stateque.revLength = sks.Offset;
                         try
@@ -852,12 +836,13 @@ namespace ETCF
                         }
                         catch (Exception ex)
                         {
-                            Log.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " " + sks.Ip + "接收异常 " + "Offset长度：" + sks.Offset.ToString() + " resBuffer长度：" + sks.RecBuffer.Length.ToString()+ "\r\n" + sks.ex.ToString() + "\r\n");
+                            Log.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " " + sks.Ip + " 接收异常 " + "Offset长度：" + sks.Offset.ToString() + " resBuffer长度：" + sks.RecBuffer.Length.ToString()+ "\r\n" + ex.ToString() + "\r\n");
                         }
                         lock (Locker1)
                         {
                             queue.Enqueue(Stateque);
                         }
+                        
                     }                
                 }
 
@@ -868,7 +853,7 @@ namespace ETCF
         #endregion
 
         #region    ******JG建立连接******
-        SocketHelper.TcpClients JGTcpClient;
+        public SocketHelper.TcpClients JGTcpClient;
         public void JGConnect(string s_Jgip, string s_Jgport)
         {
             JGTcpClient.InitSocket(s_Jgip, Convert.ToInt32(s_Jgport));
@@ -1018,266 +1003,27 @@ namespace ETCF
         //第三版本数据匹配逻辑
         public void QueueDataHanderFun3()
         {
-            bool isInRSUSql = false;
-            bool isMarch = false;
-            string sZuobistring = "";
-            List<CarFullInfo> listAllCarInfo = new List<CarFullInfo>();
-            Levenshtein LevenPercent = new Levenshtein();
-            string InsertString = "";
-            string MarchFunction = "";
-
-            while (true)//isUsingPiPei.DUIControls[1].Checked
+            StopType stp = new StopType(this);
+            while (true)
             {
-                try
+                //根据拦截模式是否开启，选择不同的匹配逻辑
+
+                //稽查模式匹配逻辑
+                if (isOpenStoptype.Checked)
                 {
-                    QueueRSUData qoutRSU = new QueueRSUData();
-                    QueueJGData qoutJG = new QueueJGData();
-                    //先取ETC的数据
-                    if (qRSUData.TryDequeue(out qoutRSU))
-                    {
-                        //先进行RSU数据存储
-                        isInRSUSql = GlobalMember.SQLInter.InsertRSUData(qoutRSU.qOBUPlateColor, qoutRSU.qOBUPlateNum, 
-                            qoutRSU.qOBUMac, qoutRSU.qOBUY,qoutRSU.qOBUBiao, qoutRSU.qOBUCarLength, qoutRSU.qOBUCarhigh, 
-                            qoutRSU.qOBUCarType, qoutRSU.qOBUDateTime, qoutRSU.qRSURandCode.ToString("X2"));
-                        if (!isInRSUSql)
-                        {
-                            //异常
-                        }
-                        for (int i = listAllCarInfo.Count - 1; i >= 0; i--)
-                        {
-                            //匹配规则
-                            //1.车牌完全相同 2.位置相同且车牌是未识别 3.开启位置匹配且位置相同
-                            //4.开启车牌模糊匹配且匹配度大于70%(由于车牌只有七位，三位不一致的时候相似度只有57%，)
-                            //模糊匹配算法为Levenstein算法修改版，适用于字节丢失匹配
-                            if (listAllCarInfo[i].sCamPlateNum == qoutRSU.qOBUPlateNum
-                                || ((listAllCarInfo[i].sCamPlateNum == "未知" || listAllCarInfo[i].sCamPlateNum == "未检测")
-                                && listAllCarInfo[i].sJGRandCode == qoutRSU.qRSURandCode.ToString("X2"))
-                                || (OpenLocation.Checked && (listAllCarInfo[i].sJGRandCode == qoutRSU.qRSURandCode.ToString("X2")))
-                                || (OpenMohu.Checked && (((int)(LevenPercent.LevenshteinDistancePercent(listAllCarInfo[i].sCamPlateNum, qoutRSU.qOBUPlateNum) * 100)) > 70)))
-                            {
-                                if(listAllCarInfo[i].sCamPlateNum == qoutRSU.qOBUPlateNum)
-                                {
-                                    MarchFunction="车牌匹配";
-                                }
-                                else if( ((listAllCarInfo[i].sCamPlateNum == "未知" || listAllCarInfo[i].sCamPlateNum == "未检测")
-                                && listAllCarInfo[i].sJGRandCode == qoutRSU.qRSURandCode.ToString("X2")))
-                                {
-                                    MarchFunction="位置匹配1";
-                                }
-                                else if((OpenLocation.Checked && (listAllCarInfo[i].sJGRandCode == qoutRSU.qRSURandCode.ToString("X2"))))
-                                {
-                                    MarchFunction="位置匹配2";
-                                }
-                                else if ((OpenMohu.Checked && (((int)(LevenPercent.LevenshteinDistancePercent(listAllCarInfo[i].sCamPlateNum, qoutRSU.qOBUPlateNum) * 100)) > 70)))
-                                {
-                                    MarchFunction="模糊匹配";
-                                }
-                                listAllCarInfo[i].sOBUCarHigh = qoutRSU.qOBUCarhigh;
-                                listAllCarInfo[i].sOBUCarLength = qoutRSU.qOBUCarLength;
-                                listAllCarInfo[i].sOBUCartype = qoutRSU.qOBUCarType;
-                                listAllCarInfo[i].sOBUDateTime = qoutRSU.qOBUDateTime;
-                                listAllCarInfo[i].sOBUMac = qoutRSU.qOBUMac;
-                                listAllCarInfo[i].sOBUPlateColor = qoutRSU.qOBUPlateColor;
-                                listAllCarInfo[i].sOBUPlateNum = qoutRSU.qOBUPlateNum;
-                                listAllCarInfo[i].sOBUY = qoutRSU.qOBUY;
-                                listAllCarInfo[i].sOBUBiao = qoutRSU.qOBUBiao;
-                                listAllCarInfo[i].sRSURandCode = qoutRSU.qRSURandCode.ToString("X2");
-                                listAllCarInfo[i].sCount = qoutRSU.qCount;
-                                isMarch = true;
-                                //界面显示
-                                sZuobistring = MarchedShow(listAllCarInfo[i].sOBUCartype, listAllCarInfo[i].sOBUPlateNum, listAllCarInfo[i].sJGCarType, listAllCarInfo[i].sCamPlateNum, listAllCarInfo[i].sCamPicPath, listAllCarInfo[i].sCount);
-                                //表格显示
-                                adddataGridViewRoll(listAllCarInfo[i].sCount, listAllCarInfo[i].sJGCarType, listAllCarInfo[i].sOBUCartype,
-                                    listAllCarInfo[i].sOBUDateTime, listAllCarInfo[i].sJGDateTime, listAllCarInfo[i].sOBUPlateNum,
-                                    listAllCarInfo[i].sCamPlateNum, listAllCarInfo[i].sOBUPlateColor, listAllCarInfo[i].sCamPlateColor,
-                                    listAllCarInfo[i].sCamBiao, listAllCarInfo[i].sJGId, listAllCarInfo[i].sOBUCarLength, listAllCarInfo[i].sOBUCarHigh, listAllCarInfo[i].sCamPicPath);
-                                //更新数据库
-                                //写入总数据库
-                                InsertString = @"Insert into " + sql_dbname
-                                    + ".dbo.CarInfo(JGLength,JGWide,JGCarType,ForceTime,CamPlateColor,CamPlateNum,Cambiao,CamPicPath,JGId,OBUPlateColor,OBUPlateNum,OBUMac,OBUY,OBUBiao,OBUCarLength,OBUCarHigh,OBUCarType,TradeTime,TradeState,RandCode,GetFunction) values('"
-                                    + listAllCarInfo[i].sJGCarLength + "','" + listAllCarInfo[i].sJGCarHigh + "','" + listAllCarInfo[i].sJGCarType + "','"
-                                    + listAllCarInfo[i].sJGDateTime + "','" + listAllCarInfo[i].sCamPlateColor + "','" + listAllCarInfo[i].sCamPlateNum + "','"
-                                    + listAllCarInfo[i].sCamBiao + "','" + listAllCarInfo[i].sCamPicPath + "','" + listAllCarInfo[i].sJGId + "','"
-                                    + listAllCarInfo[i].sOBUPlateColor + "','" + listAllCarInfo[i].sOBUPlateNum + "','" + listAllCarInfo[i].sOBUMac + "','"
-                                    + listAllCarInfo[i].sOBUY + "','" + listAllCarInfo[i].sOBUBiao + "','" + listAllCarInfo[i].sOBUCarLength + "','" + listAllCarInfo[i].sOBUCarHigh + "','"
-                                    + listAllCarInfo[i].sOBUCartype + "','" + listAllCarInfo[i].sOBUDateTime + "','" + sZuobistring + "','"
-                                    + listAllCarInfo[i].sRSURandCode + "','" + "车牌匹配" + "')";
-                                GlobalMember.SQLInter.UpdateSQLData(InsertString);
-                                listAllCarInfo.RemoveAt(i);
-                                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + MarchFunction+"成功" + qoutRSU.qRSURandCode.ToString("X2") + "OBU车牌：" + qoutRSU.qOBUPlateNum + "\r\n");
-                                break;
-                            }
-                        }
-                       
-                        if (!isMarch)
-                        {
-                            if (listAllCarInfo.Count >= 6)
-                            {
-                                //写入总数据库
-                                InsertString = @"Insert into " + sql_dbname
-                                    + ".dbo.CarInfo(JGLength,JGWide,JGCarType,ForceTime,CamPlateColor,CamPlateNum,Cambiao,CamPicPath,JGId,OBUPlateColor,OBUPlateNum,OBUMac,OBUY,OBUBiao,OBUCarLength,OBUCarHigh,OBUCarType,TradeTime,TradeState,RandCode,GetFunction) values('"
-                                    + listAllCarInfo[0].sJGCarLength + "','" + listAllCarInfo[0].sJGCarHigh + "','" + listAllCarInfo[0].sJGCarType + "','"
-                                    + listAllCarInfo[0].sJGDateTime + "','" + listAllCarInfo[0].sCamPlateColor + "','" + listAllCarInfo[0].sCamPlateNum + "','"
-                                    + listAllCarInfo[0].sCamBiao + "','" + listAllCarInfo[0].sCamPicPath + "','" + listAllCarInfo[0].sJGId + "','"
-                                    + listAllCarInfo[0].sOBUPlateColor + "','" + listAllCarInfo[0].sOBUPlateNum + "','" + listAllCarInfo[0].sOBUMac + "','"
-                                    + listAllCarInfo[0].sOBUY + "','" + listAllCarInfo[0].sOBUBiao + "','" + listAllCarInfo[0].sOBUCarLength + "','" + listAllCarInfo[0].sOBUCarHigh + "','"
-                                    + listAllCarInfo[0].sOBUCartype + "','" + listAllCarInfo[0].sOBUDateTime + "','" + "未知" + "','"
-                                    + listAllCarInfo[0].sRSURandCode + "','" + "未能匹配" + "')";
-                                GlobalMember.SQLInter.UpdateSQLData(InsertString);
-                                listAllCarInfo.RemoveAt(0);
-                                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " RSU触发队列已满，首位清空" + "OBU车牌：" + listAllCarInfo[0].sOBUPlateNum + "识别车牌：" + listAllCarInfo[0].sCamPlateNum + "\r\n");
-                            }
-                            listAllCarInfo.Add(new CarFullInfo(qoutRSU.qOBUPlateNum,qoutRSU.qOBUCarType, qoutRSU.qRSURandCode.ToString("X2"), qoutRSU.qOBUDateTime,
-                                qoutRSU.qOBUCarLength, qoutRSU.qOBUCarhigh, qoutRSU.qOBUY,qoutRSU.qOBUBiao, qoutRSU.qOBUPlateColor, qoutRSU.qOBUMac,
-                                "", "", "", "", "", "", "", "", "", "", qoutRSU.qCount));
-                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " RSU入队列" + "车牌：" + qoutRSU.qOBUPlateNum + "\r\n");
-                        }
-                        else
-                        {
-                            isMarch = false;
-                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " RSU匹配JG车牌成功" + "车牌：" + qoutRSU.qOBUPlateNum + "入库Car表\r\n");
-
-                        }
-                    }
-                    if (qJGData.TryDequeue(out qoutJG))
-                    {
-                        Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "激光数据81帧出栈完成 " + "\r\n");
-                        //入库
-                        GlobalMember.SQLInter.InsertJGData(qoutJG.qJGLength, qoutJG.qJGWide, qoutJG.qJGCarType, 
-                            qoutJG.qJGId, qoutJG.qCamPlateNum, qoutJG.qCamPicPath, qoutJG.qJGDateTime, 
-                            qoutJG.qCambiao, qoutJG.qCamPlateColor, qoutJG.qJGRandCode.ToString("X2"));
-                        for (int i = listAllCarInfo.Count - 1; i >= 0; i--)
-                        {
-                            if (listAllCarInfo[i].sOBUPlateNum == qoutJG.qCamPlateNum
-                                || ((listAllCarInfo[i].sRSURandCode == qoutJG.qJGRandCode.ToString("X2")) && qoutJG.qCamPlateNum == "未知")
-                                || (OpenLocation.Checked && (listAllCarInfo[i].sRSURandCode == qoutJG.qJGRandCode.ToString("X2")))
-                                || (OpenMohu.Checked && (((int)(LevenPercent.LevenshteinDistancePercent(listAllCarInfo[i].sOBUPlateNum, qoutJG.qCamPlateNum) * 100)) > 70)))
-                            {
-                                if (listAllCarInfo[i].sOBUPlateNum == qoutJG.qCamPlateNum)
-                                {
-                                    MarchFunction = "车牌匹配";
-                                }
-                                else if (((listAllCarInfo[i].sRSURandCode == qoutJG.qJGRandCode.ToString("X2")) && qoutJG.qCamPlateNum == "未知")
-                                || (OpenLocation.Checked && (listAllCarInfo[i].sRSURandCode == qoutJG.qJGRandCode.ToString("X2"))))
-                                {
-                                    MarchFunction = "位置匹配1";
-                                }
-                                else if ((OpenLocation.Checked && (listAllCarInfo[i].sRSURandCode == qoutJG.qJGRandCode.ToString("X2"))))
-                                {
-                                    MarchFunction = "位置匹配2";
-                                }
-                                else if ((OpenMohu.Checked && (((int)(LevenPercent.LevenshteinDistancePercent(listAllCarInfo[i].sOBUPlateNum, qoutJG.qCamPlateNum) * 100)) > 70)))
-                                {
-                                    MarchFunction = "模糊匹配";
-                                }
-                                listAllCarInfo[i].sCamBiao = qoutJG.qCambiao;
-                                listAllCarInfo[i].sCamPicPath = qoutJG.qCamPicPath;
-                                listAllCarInfo[i].sCamPlateColor = qoutJG.qCamPlateColor;
-                                listAllCarInfo[i].sCamPlateNum = qoutJG.qCamPlateNum;
-                                listAllCarInfo[i].sJGCarHigh = qoutJG.qJGWide;
-                                listAllCarInfo[i].sJGCarLength = qoutJG.qJGLength;
-                                listAllCarInfo[i].sJGCarType = qoutJG.qJGCarType;
-                                listAllCarInfo[i].sJGDateTime = qoutJG.qJGDateTime;
-                                listAllCarInfo[i].sJGId = qoutJG.qJGId;
-                                listAllCarInfo[i].sJGRandCode = qoutJG.qJGRandCode.ToString("X2");
-                                isMarch = true;
-                                //界面显示
-                                sZuobistring = MarchedShow(listAllCarInfo[i].sOBUCartype, listAllCarInfo[i].sOBUPlateNum, listAllCarInfo[i].sJGCarType, listAllCarInfo[i].sCamPlateNum, listAllCarInfo[i].sCamPicPath, listAllCarInfo[i].sCount);
-                                //表格显示
-                                adddataGridViewRoll(listAllCarInfo[i].sCount, listAllCarInfo[i].sJGCarType, listAllCarInfo[i].sOBUCartype,
-                                    listAllCarInfo[i].sOBUDateTime, listAllCarInfo[i].sJGDateTime, listAllCarInfo[i].sOBUPlateNum,
-                                    listAllCarInfo[i].sCamPlateNum, listAllCarInfo[i].sOBUPlateColor, listAllCarInfo[i].sCamPlateColor,
-                                    listAllCarInfo[i].sCamBiao, listAllCarInfo[i].sJGId, listAllCarInfo[i].sOBUCarLength, listAllCarInfo[i].sOBUCarHigh, listAllCarInfo[i].sCamPicPath);
-                                //写入总数据库
-                                InsertString = @"Insert into " + sql_dbname
-                                    + ".dbo.CarInfo(JGLength,JGWide,JGCarType,ForceTime,CamPlateColor,CamPlateNum,Cambiao,CamPicPath,JGId,OBUPlateColor,OBUPlateNum,OBUMac,OBUY,OBUBiao,OBUCarLength,OBUCarHigh,OBUCarType,TradeTime,TradeState,RandCode,GetFunction) values('"
-                                    + listAllCarInfo[i].sJGCarLength + "','" + listAllCarInfo[i].sJGCarHigh + "','" + listAllCarInfo[i].sJGCarType + "','"
-                                    + listAllCarInfo[i].sJGDateTime + "','" + listAllCarInfo[i].sCamPlateColor + "','" + listAllCarInfo[i].sCamPlateNum + "','"
-                                    + listAllCarInfo[i].sCamBiao + "','" + listAllCarInfo[i].sCamPicPath + "','" + listAllCarInfo[i].sJGId + "','"
-                                    + listAllCarInfo[i].sOBUPlateColor + "','" + listAllCarInfo[i].sOBUPlateNum + "','" + listAllCarInfo[i].sOBUMac + "','"
-                                    + listAllCarInfo[i].sOBUY + "','" + listAllCarInfo[i].sOBUBiao + "','" + listAllCarInfo[i].sOBUCarLength + "','" + listAllCarInfo[i].sOBUCarHigh + "','"
-                                    + listAllCarInfo[i].sOBUCartype + "','" + listAllCarInfo[i].sOBUDateTime + "','" + sZuobistring + "','"
-                                    + listAllCarInfo[i].sRSURandCode + "','" + MarchFunction + "')";
-                                GlobalMember.SQLInter.UpdateSQLData(InsertString);
-                                listAllCarInfo.RemoveAt(i);
-                                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + MarchFunction+"成功" + "识别车牌：" + qoutJG.qCamPlateNum + "\r\n");
-                                //弱强制匹配
-                                if (i >= 2)
-                                {
-                                    if (listAllCarInfo[i - 2].sOBUPlateNum != "" && listAllCarInfo[i - 1].sCamPlateNum != "")
-                                    {
-                                        MarchFunction = "强制匹配";
-                                        //界面显示（暂时不更新吧？）
-                                        //sZuobistring = MarchedShow(listAllCarInfo[i-2].sOBUCartype, listAllCarInfo[i-2].sOBUPlateNum, listAllCarInfo[i-1].sJGCarType, listAllCarInfo[i-1].sCamPlateNum, listAllCarInfo[i-1].sCamPicPath, listAllCarInfo[i-2].sCount);
-                                        //表格显示
-                                        adddataGridViewRoll(listAllCarInfo[i-2].sCount, listAllCarInfo[i-1].sJGCarType, listAllCarInfo[i-2].sOBUCartype,
-                                            listAllCarInfo[i-2].sOBUDateTime, listAllCarInfo[i-1].sJGDateTime, listAllCarInfo[i-2].sOBUPlateNum,
-                                            listAllCarInfo[i-1].sCamPlateNum, listAllCarInfo[i-2].sOBUPlateColor, listAllCarInfo[i-1].sCamPlateColor,
-                                            listAllCarInfo[i-1].sCamBiao, listAllCarInfo[i-1].sJGId, listAllCarInfo[i-2].sOBUCarLength, listAllCarInfo[i-2].sOBUCarHigh, listAllCarInfo[i-1].sCamPicPath);
-                                        //更新数据库
-                                        //写入总数据库
-                                        InsertString = @"Insert into " + sql_dbname
-                                            + ".dbo.CarInfo(JGLength,JGWide,JGCarType,ForceTime,CamPlateColor,CamPlateNum,Cambiao,CamPicPath,JGId,OBUPlateColor,OBUPlateNum,OBUMac,OBUY,OBUBiao,OBUCarLength,OBUCarHigh,OBUCarType,TradeTime,TradeState,RandCode,GetFunction) values('"
-                                            + listAllCarInfo[i-1].sJGCarLength + "','" + listAllCarInfo[i-1].sJGCarHigh + "','" + listAllCarInfo[i-1].sJGCarType + "','"
-                                            + listAllCarInfo[i-1].sJGDateTime + "','" + listAllCarInfo[i-1].sCamPlateColor + "','" + listAllCarInfo[i-1].sCamPlateNum + "','"
-                                            + listAllCarInfo[i-1].sCamBiao + "','" + listAllCarInfo[i-1].sCamPicPath + "','" + listAllCarInfo[i-1].sJGId + "','"
-                                            + listAllCarInfo[i-2].sOBUPlateColor + "','" + listAllCarInfo[i-2].sOBUPlateNum + "','" + listAllCarInfo[i-2].sOBUMac + "','"
-                                            + listAllCarInfo[i - 2].sOBUY + "','" + listAllCarInfo[i-2].sOBUBiao + "','" + listAllCarInfo[i - 2].sOBUCarLength + "','" + listAllCarInfo[i - 2].sOBUCarHigh + "','"
-                                            + listAllCarInfo[i-2].sOBUCartype + "','" + listAllCarInfo[i-2].sOBUDateTime + "','" + "强制匹配作弊不详" + "','"
-                                            + listAllCarInfo[i-2].sRSURandCode + "','" + "强制匹配" + "')";
-                                        GlobalMember.SQLInter.UpdateSQLData(InsertString);
-                                        
-                                        Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + MarchFunction + "成功" + listAllCarInfo[i - 2].sRSURandCode + "OBU车牌：" + listAllCarInfo[i - 2].sOBUPlateNum + "\r\n");
-                                        listAllCarInfo.RemoveAt(i - 1);
-                                        listAllCarInfo.RemoveAt(i - 2);
-                                    }
-                                }
-
-                                break;
-                            }
-                        }
-                        if (!isMarch)
-                        {
-                            if (listAllCarInfo.Count >= 6)
-                            {
-                                //写入总数据库
-                                InsertString = @"Insert into " + sql_dbname
-                                    + ".dbo.CarInfo(JGLength,JGWide,JGCarType,ForceTime,CamPlateColor,CamPlateNum,Cambiao,CamPicPath,JGId,OBUPlateColor,OBUPlateNum,OBUMac,OBUY,OBUBiao,OBUCarLength,OBUCarHigh,OBUCarType,TradeTime,TradeState,RandCode,GetFunction) values('"
-                                    + listAllCarInfo[0].sJGCarLength + "','" + listAllCarInfo[0].sJGCarHigh + "','" + listAllCarInfo[0].sJGCarType + "','"
-                                    + listAllCarInfo[0].sJGDateTime + "','" + listAllCarInfo[0].sCamPlateColor + "','" + listAllCarInfo[0].sCamPlateNum + "','"
-                                    + listAllCarInfo[0].sCamBiao + "','" + listAllCarInfo[0].sCamPicPath + "','" + listAllCarInfo[0].sJGId + "','"
-                                    + listAllCarInfo[0].sOBUPlateColor + "','" + listAllCarInfo[0].sOBUPlateNum + "','" + listAllCarInfo[0].sOBUMac + "','"
-                                    + listAllCarInfo[0].sOBUY + "','" + listAllCarInfo[0].sOBUBiao + "','" + listAllCarInfo[0].sOBUCarLength + "','" + listAllCarInfo[0].sOBUCarHigh + "','"
-                                    + listAllCarInfo[0].sOBUCartype + "','" + listAllCarInfo[0].sOBUDateTime + "','" + "未知" + "','"
-                                    + listAllCarInfo[0].sRSURandCode + "','" + "未能匹配" + "')";
-                                GlobalMember.SQLInter.UpdateSQLData(InsertString);
-                                listAllCarInfo.RemoveAt(0);
-                                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " RSU触发队列已满，首位清空" + "OBU车牌：" + listAllCarInfo[0].sOBUPlateNum + "识别车牌：" + listAllCarInfo[0].sCamPlateNum + "\r\n");
-                            }
-                            listAllCarInfo.Add(new CarFullInfo("", "", "", "", "", "", "", "","", "", qoutJG.qJGCarType,
-                                qoutJG.qJGWide, qoutJG.qJGLength, qoutJG.qJGDateTime, qoutJG.qJGId, qoutJG.qCamPlateNum,
-                                qoutJG.qCamPlateColor, qoutJG.qCambiao, qoutJG.qCamPicPath, qoutJG.qJGRandCode.ToString("X2"),""));
-                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " JG入队列" + "车牌：" + qoutJG.qCamPlateNum + "\r\n");
-                        }
-                        else
-                        {
-                            isMarch = false;
-                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " JG匹配RSU车牌成功，跟随码" + qoutJG.qJGRandCode.ToString("X2") + "车牌：" + qoutJG.qCamPlateNum + "入库Car表\r\n");
-                        }
-                    }
-                    
-
+                    stp.StartStoptype(qRSUData, qJGData, sql_dbname);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Log.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 数据匹配异常\r\n" + ex.ToString() + "\r\n");
+                    stp.StartJiChaType(qRSUData, qJGData, sql_dbname);
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
         }
         //已匹配数据显示
-        public string MarchedShow(string m_sOBUCarType, string m_sOBUPlateNum, string m_sJGCarType, string m_sCamPlateNum, string m_sPicPath, string m_sCarCount)
+        public string MarchedShow(string m_sOBUCarType, string m_sOBUPlateNum, string m_sJGCarType, string m_sCamPlateNum, string m_sPicPath, string m_sCarCount,CarFullInfo m_CarFullInfo)
         {
+            int ShutType=0;
             string sZuobiString = "";
             int iJGCarType = 0;
             int iOBUCarType = 0; 
@@ -1299,6 +1045,56 @@ namespace ETCF
                 else
                 {
                     sZuobiString = "可能作弊";
+                    //检索黑白名单
+                    //如果开启了拦截模式，进行黑白名单检索
+                    if (isOpenStoptype.Checked)
+                    {
+                        Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 已经完成匹配，开始查询黑白名单 "  + "\r\n");
+                        //查询黑白名单
+                        bool isZuobi=GlobalMember.SQLInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
+                        if (isZuobi)
+                        {
+                            switch (ShutType)
+                            { 
+                                case 0:
+                                    //普通车辆，不做任何操作，继续交易
+                                    //TcpReply(0xD6, 00, RSUTcpClient);
+                                    break;
+                                case 1:
+                                    //白名单 继续交易
+                                    //TcpReply(0xD6, 00, RSUTcpClient);
+                                    break;
+                                case 2:
+                                    //先通知天线终止交易
+                                    //TcpReply(0xD6, 01, RSUTcpClient);
+                                    //启动报警器
+                                    //Alarm();
+                                    //写入黑白名单
+                                    string InsertString = @"Insert into " + sql_dbname
+                                        + ".dbo.ShutTable(JGCarType,ForceTime,CamPlateColor,CamPlateNum,CamPicPath,"
+                                        +"OBUPlateColor,OBUPlateNum,TradeTime,InputTime,CarFlag) values('"
+                                        + m_CarFullInfo.sJGCarType + "','" + m_CarFullInfo.sJGDateTime + "','"
+                                        + m_CarFullInfo.sCamPlateColor + "','" + m_CarFullInfo.sCamPlateNum + "','"
+                                        + m_CarFullInfo.sCamPicPath + "','" + m_CarFullInfo.sOBUPlateColor + "','" 
+                                        + m_CarFullInfo.sOBUPlateNum + "','" + m_CarFullInfo.sOBUDateTime + "','"
+                                        + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "','" + (ShutType-3).ToString() + "')";
+                                    GlobalMember.SQLInter.UpdateSQLData(InsertString);
+                                    break;
+                                case 3:
+                                    //查询异常 继续交易
+                                    //TcpReply(0xD6, 00, RSUTcpClient);
+                                    break;
+                                default:
+                                    //-1,-2
+                                    //先通知天线控制器终止交易
+                                    //TcpReply(0xD6, 01, RSUTcpClient);
+                                    //启动报警器
+                                    //Alarm();
+                                    break;
+                            }
+                        }
+                        Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 返回得到结果，标识位： "+ShutType.ToString() + "\r\n");
+                    }
                 }
             }
             if (m_sPicPath != "未知"&&m_sPicPath!=""&&m_sPicPath!=null)
@@ -1307,6 +1103,64 @@ namespace ETCF
             }
             plateNoshow(m_sOBUPlateNum, m_sOBUCarType, m_sCamPlateNum, m_sJGCarType, m_sCarCount);
             return sZuobiString;
+        }
+        
+        //判断是否作弊（用于拦截模式）
+        public bool isZuobi(string m_sOBUCarType, string m_sJGCarType, string m_OBUPlateNum,ref string isZuobiString)
+        {
+            int res = 0;
+            bool isCarZuoBi = false;
+            isZuobiString = "";
+            int iJGCarType = 0;
+            int iOBUCarType = 0;
+            if (m_sJGCarType == "未知" || m_sJGCarType == "未检测" || m_sJGCarType == "" || m_sJGCarType == null)
+            {
+                isZuobiString = "作弊未知";
+                iJGCarType = 0;
+                iOBUCarType = Convert.ToInt16(m_sOBUCarType.Substring(1));
+            }
+            else
+            {
+                iJGCarType = Convert.ToInt16(m_sJGCarType.Substring(1));
+                iOBUCarType = Convert.ToInt16(m_sOBUCarType.Substring(1));
+                if (iJGCarType <= iOBUCarType)
+                {
+                    m_sJGCarType = m_sOBUCarType;
+                    isZuobiString = "正常通车";
+                    return false;
+                }
+                else
+                {
+                    isZuobiString = "可能作弊";
+                    //检索黑白名单
+                    //如果开启了拦截模式，进行黑白名单检索
+                    if (isOpenStoptype.Checked)
+                    {
+                        //查询黑白名单
+                        try
+                        {
+                            isCarZuoBi = GlobalMember.SQLInter.FindBlackOrWhiteCar(m_OBUPlateNum, ref res);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                        finally
+                        {
+                            if (isCarZuoBi)
+                            {
+                                //启动报警器
+                            }
+                            else
+                            { 
+                                //不启动
+                            }
+                        }
+                    }                   
+                }
+                return true;
+            }
+            return false;
         }
         //数据处理函数
         private void PreprocessRecvData(byte[] p_pBuffer, int p_nLen)//
@@ -1321,14 +1175,14 @@ namespace ETCF
                 case 0x81:
                     //激光数据
                     HeartJGCount = 0;
-                    Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "激光数据81帧解包完成 " + "\r\n");
-                    TcpReply(0x18, JGTcpClient);
+                    Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 激光数据81帧解包完成 " + "\r\n");
+                    TcpReply(0x18,0x00, JGTcpClient);
                     HanderJGData(p_pBuffer, p_nLen);
                     break;
                 case 0x9D:
                     //RSU的心跳
                     HeartRSUCount = 0;
-                    TcpReply(0xD9, RSUTcpClient);
+                    TcpReply(0xD9,0x00, RSUTcpClient);
                     break;
                 case 0xD9:
                     //激光心跳
@@ -1342,7 +1196,7 @@ namespace ETCF
                 case 0x7D:
                     //ETC数据
                     HeartRSUCount = 0;
-                    TcpReply(0xD7, RSUTcpClient);
+                    TcpReply(0xD7,0x00, RSUTcpClient);
                     HanderRSUData(p_pBuffer, p_nLen);
                     break;
                 case 0x82:
@@ -1371,7 +1225,7 @@ namespace ETCF
                 ss += buffer[i].ToString("X2");
                 ss += " ";
             }
-            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "收到激光的位置数据" + ss + "\r\n");
+            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 收到激光的位置数据" + ss + "\r\n");
             AddOperLogCacheStr("收到激光返回的位置数据" + ss);
             for (int i = 0; i < 8; i++)
             {
@@ -1381,14 +1235,14 @@ namespace ETCF
             }
         }
 
-        public void TcpReply(byte command, SocketHelper.TcpClients sk)
+        public void TcpReply(byte command,byte secondcom, SocketHelper.TcpClients sk)
         {
 
             int send_lenth = 0;
             byte[] send_buffer;
             send_buffer = new byte[100];
             send_buffer[send_lenth++] = command;
-            send_buffer[send_lenth++] = 0x00;
+            send_buffer[send_lenth++] = secondcom;
             datah.DataCoding(ref send_buffer, ref send_lenth);
             if (sk == JGTcpClient)
             {
@@ -1728,7 +1582,7 @@ namespace ETCF
             QueueRSUData m_qRSU = new QueueRSUData();
             m_qRSU = HRSUDataToQ.HanderRSUDataIn(databuff, bufflen);
             
-            SendLocation((ushort)(databuff[8 + 2] << 8 | databuff[9 + 2]), m_qRSU.qRSURandCode);
+            //SendLocation((ushort)(databuff[8 + 2] << 8 | databuff[9 + 2]), m_qRSU.qRSURandCode);
             //SendLocation(0xfdfd, m_qRSU.qRSURandCode);
             
             lock (qRSUData)
@@ -1859,7 +1713,7 @@ namespace ETCF
             HeartRSUCount++;
             //if (IsConnJG)
             //{
-            TcpReply(0x9D, JGTcpClient);
+            TcpReply(0x9D,0x00, JGTcpClient);
             //}
             if (HeartJGCount >= 5)
             {
@@ -1888,6 +1742,71 @@ namespace ETCF
             Application.Exit();
             
             
+        }
+        //打开串口
+        private SerialPort comm = new SerialPort();//串口
+        public void OpenCom()
+        {
+            comm.PortName = "COM1";
+            comm.BaudRate = int.Parse("115200");
+
+            try
+            {
+                if (comm.IsOpen)
+                {
+                    comm.Close();
+                }
+                else
+                {
+                    comm.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLog(DateTime.Now + "\r\n" + "串口打开异常\r\n" + ex.ToString());
+                return;
+            }
+
+        }
+        //关闭串口
+        public void CloseCom()
+        {
+            try
+            {
+                comm.Close();
+            }
+            catch (System.Exception ex)
+            {
+                Log.WriteLog(DateTime.Now + "\r\n" + "串口关闭异常\r\n" + ex.ToString());
+                return;
+            }
+        }
+        //启动报警
+        public void Alarm()
+        {
+            try
+            {
+                OpenCom();
+                RTSEnable();//声光灯报警
+                System.Threading.Thread.Sleep(3000);
+                RTSDisable();
+                CloseCom();
+            }
+            catch (System.Exception ex)
+            {
+                Log.WriteLog(DateTime.Now + "\r\n" + "相应报警灯异常\r\n" + ex.ToString());
+                return;
+            }
+        }
+        //RTS使能
+        public void RTSEnable()
+        {
+            comm.RtsEnable = true;
+        }
+        //RTS取消
+        public void RTSDisable()
+        {
+            comm.RtsEnable = false;
         }
 
         private void imageButtonNext_Click(object sender, EventArgs e)

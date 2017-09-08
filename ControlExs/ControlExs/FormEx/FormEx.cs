@@ -244,7 +244,7 @@ namespace ControlExs
                 {
                     if (MaximizeBox) { cp.Style |= (int)WindowStyle.WS_MAXIMIZEBOX; }
                     if (MinimizeBox) { cp.Style |= (int)WindowStyle.WS_MINIMIZEBOX; }
-                    //cp.ExStyle |= (int)WindowStyle.WS_CLIPCHILDREN;  //防止因窗体控件太多出现闪烁
+                    cp.ExStyle |= (int)WindowStyle.WS_CLIPCHILDREN;  //防止因窗体控件太多出现闪烁
                     cp.ClassStyle |= (int)ClassStyle.CS_DropSHADOW;  //实现窗体边框阴影效果
                 }
                 return cp;

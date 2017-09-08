@@ -55,6 +55,8 @@
             this.imageButton1 = new ControlExs.ImageButton();
             this.animatedTabs1 = new CCWin.SkinControl.SkinTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label26 = new System.Windows.Forms.Label();
+            this.isOpenStoptype = new ETCF.myButtonCheck();
             this.label11 = new System.Windows.Forms.Label();
             this.labelNum = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -441,6 +443,7 @@
             // 
             // animatedTabs1
             // 
+            this.animatedTabs1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.animatedTabs1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -488,6 +491,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label26);
+            this.tabPage1.Controls.Add(this.isOpenStoptype);
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.labelNum);
             this.tabPage1.Controls.Add(this.label3);
@@ -509,6 +514,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "稽查主界面";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label26
+            // 
+            this.animator.SetDecoration(this.label26, CCWin.SkinControl.DecorationType.None);
+            this.label26.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label26.Location = new System.Drawing.Point(678, 49);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(143, 32);
+            this.label26.TabIndex = 82;
+            this.label26.Text = "拦截模式：";
+            // 
+            // isOpenStoptype
+            // 
+            this.isOpenStoptype.BackColor = System.Drawing.Color.Transparent;
+            this.isOpenStoptype.Checked = false;
+            this.isOpenStoptype.CheckStyleX = ETCF.CheckStyle.style2;
+            this.isOpenStoptype.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator.SetDecoration(this.isOpenStoptype, CCWin.SkinControl.DecorationType.None);
+            this.isOpenStoptype.Location = new System.Drawing.Point(827, 51);
+            this.isOpenStoptype.Name = "isOpenStoptype";
+            this.isOpenStoptype.Size = new System.Drawing.Size(80, 30);
+            this.isOpenStoptype.TabIndex = 81;
             // 
             // label11
             // 
@@ -1700,12 +1727,14 @@
         private System.Windows.Forms.Button btnReadConfig;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Timer timer1;
-        private myButtonCheck OpenMohu;
-        private myButtonCheck OpenLocation;
-        private myButtonCheck OpenForce;
+        public myButtonCheck OpenMohu;
+        public myButtonCheck OpenLocation;
+        public myButtonCheck OpenForce;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label26;
+        public myButtonCheck isOpenStoptype;
 
 
 

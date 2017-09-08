@@ -67,6 +67,7 @@
     <Compile Include="CameraInterface\ipcsdk.cs" />
     <Compile Include="CameraInterface\IPNCCamera.cs" />
     <Compile Include="CameraInterface\IPNCSDK.cs" />
+    <Compile Include="ComperLogic\StopType.cs" />
     <Compile Include="DataCoding\DataHander.cs" />
     <Compile Include="DataCoding\HanderJGData.cs" />
     <Compile Include="DataCoding\HanderRSUDataToQueue.cs" />

@@ -182,6 +182,43 @@ namespace ETCF
                 return false;
             }
         }
+        //检索黑白名单
+        //0-为普通车辆 1为白名单车辆 -1为一次黑名单（可能因为误操作引起） -2为永久黑名单 2为不在黑白名单队列 -3异常
+        public bool FindBlackOrWhiteCar(string CarNumber,ref int ShutType)
+        {
+            string SelectString = "select * from ShutTable where OBUPlateNum="+"'"+CarNumber+"'";
+            try
+            {
+                if (SQLconnection.State != System.Data.ConnectionState.Open)
+                {
+                    MF.AddOperLogCacheStr("天线数据插入失败");
+                    return false;
+                }
+                SqlCommand cmd = new SqlCommand(SelectString, SQLconnection);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        ShutType |= reader.GetInt32(10);
+                    }
+                    else
+                        ShutType = 2;
+                }
+                if (!reader.HasRows)
+                    ShutType = 2;    
+            }
+            catch (Exception ex)
+            {
+                MF.AddOperLogCacheStr("黑白名单查询失败" + ex.ToString());
+                Log.WriteLog(DateTime.Now + " 查询黑白名单出现异常\r\n" + ex.ToString() + "\r\n");
+                ShutType = -3;
+                //MessageBox.Show(ex.ToString());
+                return false;
+            }
+            return true;
+        }
         //数据更新通用函数
         public bool UpdateSQLData(string SQLString)
         {
