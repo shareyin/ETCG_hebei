@@ -117,6 +117,33 @@ namespace ETCF
              //        storePic(datajpg, bstrIP, bstrNumber, true, nCapTime, null, "");
              //}
          }
+        //强制抓拍
+         public void ForceGetPic()
+         {
+             if (pUid[0] != IntPtr.Zero)
+             {
+                 StringBuilder strNum = new StringBuilder(32);
+                 StringBuilder strColor = new StringBuilder(64);
+                 uint len = 0;
+                 //IntPtr pLen = Marshal.AllocHGlobal(32);
+                 byte[] pdata = new byte[1048576];
+                 uint success = ipcsdk.ICE_IPCSDK_Trigger(pUid[0], strNum, strColor, pdata, 1048576, ref len);//软触发
+                 //if (1 == success && len > 0)
+                 //{
+                 //    if (len > 0)
+                 //    {
+                 //        byte[] datajpg2 = new byte[len];
+                 //        Array.Copy(pdata, 0, datajpg2, 0, datajpg2.Length);//拷贝图片数据
+                 //        storePic(datajpg2, textBoxIP1.Text, strNum.ToString(), false, 0);//存图
+                 //    }
+                 //    labelPlate1.Text = count[0] + " " + strNum.ToString() + " " + strColor.ToString();
+                 //    count[0]++;
+                 //}
+                 pdata = null;
+                 strNum = null;
+                 strColor = null;
+             }
+         }
 
          //存图
          public void storePic(byte[] picData, string strIP, string strNumber, bool bIsPlate, UInt32 nCapTime, float[] fResFuture, string strLogName)
@@ -131,7 +158,7 @@ namespace ETCF
                  dt = DateTime.Parse("1970-01-01 08:00:00").AddSeconds(nCapTime);
              }
 
-             string strDir = ".\\plateimage" + @"\" + dt.ToString("yyyyMMdd");
+             string strDir = GlobalMember.SavePicPath + "\\" + dt.ToString("yyyyMMdd");
              if (!Directory.Exists(strDir))
              {
                  Directory.CreateDirectory(strDir);
@@ -139,9 +166,9 @@ namespace ETCF
 
              string strPicName;
              if (strLogName.Length != 0)
-                 strPicName = strDir + @"\" + dt.ToString("yyyyMMddHHmmss") + "_" + strLogName + "_" + strNumber;
+                 strPicName = strDir + "\\" + dt.ToString("yyyyMMddHHmmss") + "_" + strLogName + "_" + strNumber;
              else
-                 strPicName = strDir + @"\" + dt.ToString("yyyyMMddHHmmss") + "_" + strNumber;
+                 strPicName = strDir + "\\" + dt.ToString("yyyyMMddHHmmss") + "_" + strNumber;
              if (bIsPlate)//车牌图，图片名后缀加_plate
                  strPicName += "_plate";
              //string tmp = strPicName;
@@ -151,7 +178,7 @@ namespace ETCF
                  int count = 1;
                  while (count <= 10)
                  {
-                     strPicName = strDir + @"\" + dt.ToString("yyyyMMddHHmmss") + "_" + strNumber;
+                     strPicName = strDir + "\\" + dt.ToString("yyyyMMddHHmmss") + "_" + strNumber;
                      if (bIsPlate)
                      {
                          strPicName += "_plate";
@@ -175,7 +202,7 @@ namespace ETCF
                  bw.Close();
                  fs.Close();
              }
-             catch (System.Exception ex)
+             catch (System.Exception)
              {
 
              }
@@ -205,7 +232,7 @@ namespace ETCF
                      sw.Close();
                  }
              }
-             catch (System.Exception ex)
+             catch (System.Exception)
              {
 
              }
@@ -290,7 +317,7 @@ namespace ETCF
                      fs.Close();
 
                  }
-                 catch (System.Exception ex)
+                 catch (System.Exception)
                  {
                      //MessageBox.Show("frame" + ex.Message);
                  }
@@ -407,7 +434,7 @@ namespace ETCF
                          }
                      }
                  }
-                 catch (Exception e)
+                 catch (Exception)
                  {
 
                      //MessageBox.Show(e.Message);

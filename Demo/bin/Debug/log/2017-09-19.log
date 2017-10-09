@@ -1,0 +1,360 @@
+2017-09-19 14:55:29:981 连接摄像机异常
+System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 ETCF.ipcsdk.ICE_IPCSDK_Init()
+   在 ETCF.IPCCamera.initIPC(String IPCCameraip) 位置 E:\GitHubHome\ETCG_hebei\Demo\CameraInterface\IPCCamera.cs:行号 33
+   在 ETCF.FormDemo.FormDemo_Load(Object sender, EventArgs e) 位置 E:\GitHubHome\ETCG_hebei\Demo\FormDemo.cs:行号 399
+2017-09-19 14:55:30:448 Socket推送UI异常 192.168.0.208:8000
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 577
+2017/9/19 14:55:31 系统异常
+System.UnhandledExceptionEventArgs
+2017/9/19 14:55:45 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 14:58:35:015 连接摄像机异常
+System.BadImageFormatException: 试图加载格式不正确的程序。 (异常来自 HRESULT:0x8007000B)
+   在 ETCF.ipcsdk.ICE_IPCSDK_Init()
+   在 ETCF.IPCCamera.initIPC(String IPCCameraip) 位置 E:\GitHubHome\ETCG_hebei\Demo\CameraInterface\IPCCamera.cs:行号 33
+   在 ETCF.FormDemo.FormDemo_Load(Object sender, EventArgs e) 位置 E:\GitHubHome\ETCG_hebei\Demo\FormDemo.cs:行号 399
+2017/9/19 14:58:35 系统异常
+System.UnhandledExceptionEventArgs
+2017/9/19 14:58:49 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 15:02:05:612 Socket推送UI异常 192.168.0.208:8000
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 577
+2017-09-19 15:02:22:101 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:02:23:296 Socket建立连接异常 192.168.0.112:4007
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.112:4007
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:02:36:122 天线控制器已检测断开，正在重连
+2017-09-19 15:02:55:255 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:02:55:257 天线控制器已检测断开，正在重连
+2017-09-19 15:03:26:393 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:03:26:393 天线控制器已检测断开，正在重连
+2017-09-19 15:03:57:486 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:03:57:487 天线控制器已检测断开，正在重连
+2017-09-19 15:04:28:577 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:04:28:578 天线控制器已检测断开，正在重连
+2017-09-19 15:04:56:699 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:04:56:701 天线控制器已检测断开，正在重连
+2017-09-19 15:05:04:571 192.168.0.112:4007Socket异常
+System.IO.IOException: 无法从传输连接中读取数据: 您的主机中的软件中止了一个已建立的连接。。 ---> System.Net.Sockets.SocketException: 您的主机中的软件中止了一个已建立的连接。
+   在 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 561
+2017-09-19 15:05:25:651 Socket建立连接异常 192.168.0.112:4007
+System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.0.112:4007
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:05:25:651 激光Socket异常 已自动恢复连接
+2017-09-19 15:05:25:686 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-09-19 15:05:25:797 Socket异常
+System.Exception: 发送数据失败，客户端无连接..
+2017-09-19 15:05:27:835 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:05:27:836 天线控制器已检测断开，正在重连
+2017-09-19 15:05:42:416 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:06:03:508 Socket建立连接异常 192.168.0.112:4007
+System.Net.Sockets.SocketException (0x80004005): 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 192.168.0.112:4007
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 15:06:05:756 摄像机已检测断开，正在重连
+2017-09-19 15:06:09:795 摄像机已检测断开，正在重连
+2017-09-19 15:06:13:823 摄像机已检测断开，正在重连
+2017-09-19 15:06:17:848 摄像机已检测断开，正在重连
+2017-09-19 15:06:21:891 摄像机已检测断开，正在重连
+2017-09-19 15:06:25:945 摄像机已检测断开，正在重连
+2017-09-19 15:06:30:000 摄像机已检测断开，正在重连
+2017-09-19 15:06:34:026 摄像机已检测断开，正在重连
+2017-09-19 16:52:06:307 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017/9/19 16:52:12 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 16:52:32:630 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:52:35:170 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017/9/19 16:52:36 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 16:52:36:309 Socket建立连接异常 192.168.0.112:4007
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.112:4007
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017/9/19 16:52:46 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 16:52:57:679 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:53:08:306 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:53:08:306 天线控制器已检测断开，正在重连
+2017-09-19 16:53:12:666 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:54:28:786 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:54:29:516 Socket推送UI异常 192.168.0.112:4007
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 577
+2017-09-19 16:55:00:866 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:55:00:867 天线控制器已检测断开，正在重连
+2017-09-19 16:55:35:855 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:56:10:841 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:56:10:843 天线控制器已检测断开，正在重连
+2017/9/19 16:56:23 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 16:56:45:905 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:57:15:826 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:57:47:882 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 在一个非套接字上尝试了一个操作。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 16:57:47:883 天线控制器已检测断开，正在重连
+2017/9/19 16:57:54 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 16:58:27:807 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017/9/19 16:58:30 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 16:59:59:873 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:00:00:700 Socket推送UI异常 192.168.0.112:4007
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ETCF.SocketHelper.TcpClients.EndReader(IAsyncResult ir) 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 577
+2017-09-19 17:00:17:098 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:00:18:231 Socket建立连接异常 192.168.0.112:4007
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.112:4007
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:00:31:955 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:00:31:955 天线控制器已检测断开，正在重连
+2017-09-19 17:00:53:151 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:00:53:152 天线控制器已检测断开，正在重连
+2017-09-19 17:01:03:070 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:01:03:072 天线控制器已检测断开，正在重连
+2017-09-19 17:01:21:258 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:01:21:260 天线控制器已检测断开，正在重连
+2017-09-19 17:01:34:258 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:01:34:259 天线控制器已检测断开，正在重连
+2017-09-19 17:01:52:370 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:01:52:372 天线控制器已检测断开，正在重连
+2017-09-19 17:02:02:412 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:02:02:413 天线控制器已检测断开，正在重连
+2017-09-19 17:02:23:456 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:02:23:460 天线控制器已检测断开，正在重连
+2017-09-19 17:02:33:590 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:02:33:590 天线控制器已检测断开，正在重连
+2017-09-19 17:02:51:582 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:02:51:585 天线控制器已检测断开，正在重连
+2017-09-19 17:03:04:740 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:03:04:742 天线控制器已检测断开，正在重连
+2017-09-19 17:03:22:719 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:03:22:721 天线控制器已检测断开，正在重连
+2017-09-19 17:03:32:876 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:03:32:876 天线控制器已检测断开，正在重连
+2017-09-19 17:03:52:387 Socket异常
+System.Exception: 客户端没有初始化.!
+2017-09-19 17:03:57:340 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017-09-19 17:04:42:019 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531
+2017/9/19 17:04:49 系统异常
+System.UnhandledExceptionEventArgs
+2017-09-19 17:05:14:174 Socket建立连接异常 192.168.0.208:8000
+System.Net.Sockets.SocketException (0x80004005): 由于目标计算机积极拒绝，无法连接。 192.168.0.208:8000
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   在 System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   在 ETCF.SocketHelper.TcpClients.Connect() 位置 E:\GitHubHome\ETCG_hebei\Demo\SocketHelper.cs:行号 531

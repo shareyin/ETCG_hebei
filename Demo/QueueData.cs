@@ -7,8 +7,9 @@ namespace ETCF
 {
     public class QueueJGData
     {
+        public long qJGLocation;
         public string qJGLength;
-        public string qJGWide;
+        public string qJGHigh;
         public string qJGCarType;
         public string qJGId;
         public string qCamPlateNum;
@@ -17,6 +18,8 @@ namespace ETCF
         public string qCambiao;
         public string qJGDateTime;
         public long qJGRandCode;
+        public int qJGListNum;
+        public string qJGGetPic; 
     }
     //public class QueueCam
     //{
@@ -68,12 +71,16 @@ namespace ETCF
         public string sOBUY { get; set; }
         public string sOBUBiao { get; set; }
 
+
         public string sJGCarType { get; set; }
         public string sJGCarHigh { get; set; }
         public string sJGCarLength { get; set; }
         public string sJGDateTime { get; set; }
         public string sJGId { get; set; }
         public string sJGRandCode { get; set; }
+
+        public long sJGLocation { get; set; }
+        public string sGetPic { get; set; }
 
         public string sCamPlateNum { get; set; }
         public string sCamPlateColor { get; set; }
@@ -122,16 +129,81 @@ namespace ETCF
         public string qCamPlateColor { get; set; }
         public string qCamPicPath { get; set; }
         public string qCambiao { get; set; }
+        public string qJGLength { get; set; }
+        public string qJGHigh { get; set; }
+        public string qJGCarType { get; set; }
+        public string qJGDateTime { get; set; }
 
-         public CamList(string s_JgId, string s_CamPlateNum, string s_CamPlateColor, string s_CamPicPath, string s_Cambiao)
+         public CamList(string s_JgId, string s_CamPlateNum, string s_CamPlateColor, string s_CamPicPath, string s_Cambiao,string s_JGLength,string s_JGHigh,string s_JGCarType,string s_JGDateTime)
         {
             qJGID = s_JgId;
             qCamPlateNum = s_CamPlateNum;
             qCamPlateColor = s_CamPlateColor;
             qCamPicPath = s_CamPicPath;
             qCambiao = s_Cambiao;
+            
+            qJGLength = s_JGLength;
+            qJGHigh = s_JGHigh;
+            qJGCarType = s_JGCarType;
+            qJGDateTime = s_JGDateTime;
 
         }
     }
+
+    public class JGMainList
+    {
+        public string qJGID { get; set; }
+        public long qJGLocation { get; set; }
+        public string qJGCarLength { get; set; }
+        public string qJGCarHigh { get; set; }
+        public string qGetPicDone { get; set; }
+        public string qJGDateTime { get; set; }
+        
+
+        public JGMainList(string s_JgId, long s_JGLocation, string s_JGCarLength, string s_JGCarHigh, string s_GetPicDone,string s_JGDateTime)
+        {
+            qJGID = s_JgId;
+            qJGLocation = s_JGLocation;
+            qJGCarLength = s_JGCarLength;
+            qJGCarHigh = s_JGCarHigh;
+            qGetPicDone = s_GetPicDone;
+            qJGDateTime = s_JGDateTime;
+
+        }
+    }
+
+
+    public struct AllInfo
+    {
+        public string sOBUPlateNum { get; set; }
+        public string sOBUCartype { get; set; }
+        public string sRSURandCode { get; set; }
+        public string sOBUDateTime { get; set; }
+        public string sOBUCarLength { get; set; }
+        public string sOBUCarHigh { get; set; }
+        public string sOBUPlateColor { get; set; }
+        public string sOBUMac { get; set; }
+        public string sOBUY { get; set; }
+        public string sOBUBiao { get; set; }
+
+
+        public string sJGCarType { get; set; }
+        public string sJGCarHigh { get; set; }
+        public string sJGCarLength { get; set; }
+        public string sJGDateTime { get; set; }
+        public string sJGId { get; set; }
+        public string sJGRandCode { get; set; }
+
+        public long sJGLocation { get; set; }
+        public string sGetPic { get; set; }
+
+        public string sCamPlateNum { get; set; }
+        public string sCamPlateColor { get; set; }
+        public string sCamBiao { get; set; }
+        public string sCamPicPath { get; set; }
+
+        public string sCount { get; set; }
+    }
+    
 
 }

@@ -121,7 +121,7 @@ namespace ETCF
                     MF.AddOperLogCacheStr("保存车牌图片失败!");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MF.AddOperLogCacheStr("保存车牌图片失败!");
             }

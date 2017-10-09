@@ -79,7 +79,7 @@ namespace ETCF
             {
                 if (SQLconnection == null)
                 {
-                    string connectionString = @"Persist Security Info=True;User ID=" + sql_username + ";Password =" + sql_password + ";Initial Catalog=" + sql_dbname + ";Data Source=" + sql_ip;
+                    string connectionString = @"Persist Security Info=True;User ID=" + sql_username + ";Password =" + sql_password + ";Initial Catalog=" + sql_dbname + ";Data Source=" + sql_ip+"; MultipleActiveResultSets = True";
                     SQLconnection = new SqlConnection(connectionString);
 
                     SQLconnection.Open();
@@ -135,9 +135,9 @@ namespace ETCF
 
         #region ******数据库操作******
         //插入激光数据
-        public bool InsertJGData(string s_JGCarLength, string s_JGCarWide, string s_JGCarType, string s_JGId, string s_CamPlateNum, string s_CamPicPath, string s_CamForceTime, string s_Cambiao, string s_CamPlateColor, string s_RandCode)
+        public bool InsertJGData(string s_JGCarLength, string s_JGCarWide, string s_JGCarType, string s_JGId, string s_CamPlateNum, string s_CamPicPath, string s_CamForceTime, string s_Cambiao, string s_CamPlateColor, string s_RandCode,string s_LaneNo)
         {
-            string InsertString = @"Insert into " + sql_dbname + ".dbo.JGInfo(JGLength,JGWide,JGCarType,CamPlateNum,ForceTime,Cambiao,CamPicPath,JGId,CamPlateColor,RandCode) values('" + s_JGCarLength + "','" + s_JGCarWide + "','" + s_JGCarType + "','" + s_CamPlateNum + "','" + s_CamForceTime + "','" + s_Cambiao + "','" + s_CamPicPath + "','" + s_JGId + "','" + s_CamPlateColor + "','" + s_RandCode + "')";
+            string InsertString = @"Insert into " + sql_dbname + ".dbo.JGInfo(JGLength,JGWide,JGCarType,CamPlateNum,ForceTime,Cambiao,CamPicPath,JGId,CamPlateColor,RandCode,LaneNo) values('" + s_JGCarLength + "','" + s_JGCarWide + "','" + s_JGCarType + "','" + s_CamPlateNum + "','" + s_CamForceTime + "','" + s_Cambiao + "','" + s_CamPicPath + "','" + s_JGId + "','" + s_CamPlateColor + "','" + s_RandCode + "','" + s_LaneNo + "')";
             try
             {
                 if (SQLconnection.State != System.Data.ConnectionState.Open)
@@ -159,9 +159,9 @@ namespace ETCF
             }
         }
         //插入RSU数据
-        public bool InsertRSUData(string s_OBUPlateColor, string s_OBUPlateNum, string s_OBUMac, string s_OBUY, string s_OBUBiao,string s_OBUCarLength, string s_OBUCarHigh, string s_OBUCarType, string s_TradeTime, string s_RandCode)
+        public bool InsertRSUData(string s_OBUPlateColor, string s_OBUPlateNum, string s_OBUMac, string s_OBUY, string s_OBUBiao,string s_OBUCarLength, string s_OBUCarHigh, string s_OBUCarType, string s_TradeTime, string s_RandCode,string s_LaneNo)
         {
-            string InsertString = @"Insert into " + sql_dbname + ".dbo.OBUInfo(OBUPlateColor,OBUPlateNum,OBUMac,OBUY,OBUCarLength,OBUCarHigh,OBUCarType,TradeTime,RandCode) values('" + s_OBUPlateColor + "','" + s_OBUPlateNum + "','" + s_OBUMac + "','" + s_OBUY + "','" + s_OBUCarLength + "','" + s_OBUCarHigh + "','" + s_OBUCarType + "','" + s_TradeTime + "','" + s_RandCode + "')";
+            string InsertString = @"Insert into " + sql_dbname + ".dbo.OBUInfo(OBUPlateColor,OBUPlateNum,OBUMac,OBUY,OBUCarLength,OBUCarHigh,OBUCarType,TradeTime,RandCode,LaneNo) values('" + s_OBUPlateColor + "','" + s_OBUPlateNum + "','" + s_OBUMac + "','" + s_OBUY + "','" + s_OBUCarLength + "','" + s_OBUCarHigh + "','" + s_OBUCarType + "','" + s_TradeTime + "','" + s_RandCode + "','" + s_LaneNo + "')";
             try
             {
                 if (SQLconnection.State != System.Data.ConnectionState.Open)
@@ -217,7 +217,35 @@ namespace ETCF
                 //MessageBox.Show(ex.ToString());
                 return false;
             }
-            return true;
+            if (ShutType == -1 || ShutType == -2)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //更新黑白名单
+        public int UpdateBlackOrWhiteCar(string OBUCarnumber, int BlackOrWhite)
+        {
+            try
+            {
+                if (SQLconnection.State != System.Data.ConnectionState.Open)
+                {
+                    MF.AddOperLogCacheStr("天线数据插入失败");
+                    return -1;
+                }
+                string UpdateString = "update ShutTable set CarFlag=" + "'" + BlackOrWhite + "'" + "where OBUPlateNum=" + "'" + OBUCarnumber + "'";
+                SqlCommand mySqlCommand = new SqlCommand(UpdateString, SQLconnection);
+                mySqlCommand.ExecuteNonQuery();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLog(DateTime.Now + "\r\n" + "更新黑白名单\r\n" + ex.ToString() + "\r\n");
+                SQLconnection.Close();
+                return -1;
+            }
         }
         //数据更新通用函数
         public bool UpdateSQLData(string SQLString)

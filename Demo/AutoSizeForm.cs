@@ -81,9 +81,7 @@ namespace ETCF
                 c.Left = (int)((ctrLeft0) * wScale);//新旧控件之间的线性比例。控件位置只相对于窗体，所以不能加 + wLeft1
                 c.Top = (int)((ctrTop0) * hScale);//
                 c.Width = (int)(ctrWidth0 * wScale);//只与最初的大小相关，所以不能与现在的宽度相乘 (int)(c.Width * w);
-                c.Height = (int)(ctrHeight0 * hScale);//
-                ctrlNo++;//累加序号
-                //**放在这里，是先缩放控件本身，后缩放控件的子控件
+                c.Height = (int)(ctrHeight0 * hScale);//                ctrlNo++;//累加序号                //**放在这里，是先缩放控件本身，后缩放控件的子控件
                 if (c.Controls.Count > 0)
                     AutoScaleControl(c, wScale, hScale);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
 

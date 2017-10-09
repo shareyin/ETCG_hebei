@@ -279,7 +279,7 @@ namespace ETCF
                     GetVehicleLogoRecog = CHCNetSDK.VLR_VEHICLE_CLASS[struPlateResultInfo.struVehicleInfo.byVehicleLogoRecog];
 
                     FlieClass fc = new FlieClass();
-                    string dirpath = ".\\image\\";
+                    string dirpath = GlobalMember.SavePicPath+"\\";
                     DateTime forcetimedt = DateTime.Now;
                     string forcetime = forcetimedt.ToString("yyyyMMddHHmmss");
                     string imagename = forcetime + GetPlateNo + ".bmp";
@@ -307,7 +307,7 @@ namespace ETCF
                             return -1;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //AddOperLogCacheStr("保存车牌图片失败!");
                         Marshal.FreeHGlobal(struPlateResultInfo.pBuffer1);
@@ -387,7 +387,7 @@ namespace ETCF
             GetVehicleLogoRecog = "";
             GetVehicleLogoRecog = CHCNetSDK.VLR_VEHICLE_CLASS[struITSPlateResult.struVehicleInfo.byVehicleLogoRecog];
             FlieClass fc = new FlieClass();
-            string dirpath = ".\\plateimage\\";
+            string dirpath = GlobalMember.SavePicPath+"\\";
             DateTime forcetimedt = DateTime.Now;
             string forcetime = forcetimedt.ToString("yyyyMMddHHmmss");
             string imagename = forcetime + GetPlateNo + ".bmp";
@@ -418,7 +418,7 @@ namespace ETCF
                     return 1;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MF.AddOperLogCacheStr("保存车牌图片失败!");
                 return 1;

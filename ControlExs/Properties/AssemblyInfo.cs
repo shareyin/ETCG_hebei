@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ControlExs")]
-[assembly: AssemblyCopyright("Copyright © 苦笑  2013")]
+[assembly: AssemblyCopyright("Copyright ")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

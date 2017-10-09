@@ -16,6 +16,7 @@ using System.Net.Sockets;
 using System.Drawing.Text;
 using LayeredSkin.DirectUI;
 using System.IO.Ports;
+using MySql.Data.MySqlClient;
 
 namespace ETCF
 {
@@ -23,7 +24,7 @@ namespace ETCF
     {
         #region Constructor
 
-        public FormDemo():base()
+        public FormDemo()//:base()
         {
             InitializeComponent();
             initDelegateState();
@@ -119,10 +120,22 @@ namespace ETCF
         System.Collections.Concurrent.ConcurrentQueue<StateObject> queue = new System.Collections.Concurrent.ConcurrentQueue<StateObject>();//用于缓存
         private static readonly object Locker1 = new object();
         private static readonly object Locker2 = new object();
-        List<CamList> listCamInfo = new List<CamList>();
+        public List<CamList> listCamInfo = new List<CamList>();//摄像机数据的队列
+        public List<JGMainList> listJGMain = new List<JGMainList>();//激光数据队列
+        public ManualResetEvent JGMainDone = new ManualResetEvent(false);//激光主要数据帧入栈标识
+
+        public ManualResetEvent JGHeartGo = new ManualResetEvent(false);//激光主要数据帧入栈标识
+        public static int NumInJGList = 0; //激光数据帧中包含位置数量（一般情况下不超过3个，我觉得）
+        //增加拦车判别标准
+        public static bool NotStopNear = false;//车型相差1是否拦车
+        public static bool NotStopBetween3And4 = false;//客3客4作弊是否拦车
+        public static bool NotStopWhite = false;//白牌车是否拦车
+        public static bool JGandRSUInSameLocation = false;//天线与激光是否同杆，通过是否同杆来选择匹配逻辑
+
 
         Thread workThread;
         Thread queueThread;
+        Thread HeartAct;
         public StringBuilder OperLogCacheStr = new StringBuilder();//UI日志缓存
         Thread ProtectThread;
         public object UpdateOperLog_LockObj = new object();
@@ -137,6 +150,8 @@ namespace ETCF
         #endregion
 
         #region ******数据库相关参数******
+        
+
         private string sql_ip;//SQLServer的ip
         private string sql_dbname;//SQLServer数据库名称
         private string sql_username;//用户名
@@ -180,7 +195,8 @@ namespace ETCF
         private void readconfig()
         {
             StringBuilder temp = new StringBuilder();
-
+            GetPrivateProfileString("SQLServer", "sql_type", "0", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.SqlType = temp.ToString().Equals("SQLServer") ? "SQLServer" : "MySql";
             GetPrivateProfileString("SQLServer", "sql_ip", "0", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
             sql_ip = temp.ToString();
             GetPrivateProfileString("SQLServer", "sql_dbname", "0", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
@@ -211,12 +227,66 @@ namespace ETCF
 
             GetPrivateProfileString("ComCameraconfig", "CameIP", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
             ComCameraip = temp.ToString();
+            GetPrivateProfileString("ComCameraconfig", "SavePicPathInDisk", "D:", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.SavePicPath = temp.ToString();
+            
 
             GetPrivateProfileString("SoftFunction", "CameraType", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
             CameraType = temp.ToString();
 
             GetPrivateProfileString("SoftFunction", "OpenLocation", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
             OpenLocationPipei = temp.ToString();
+
+            GetPrivateProfileString("SoftFunction", "LaneNo", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.g_sLaneNo = temp.ToString();
+
+            GetPrivateProfileString("SoftFunction", "NotStopPlateColorIsWhite", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            NotStopWhite = temp.ToString().Equals("0") ? false : true;
+            GetPrivateProfileString("SoftFunction", "NotStopCarTypeNear", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            NotStopNear = temp.ToString().Equals("0") ? false : true;
+            GetPrivateProfileString("SoftFunction", "NotStopCarTypeBetween3And4", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            NotStopBetween3And4 = temp.ToString().Equals("0") ? false : true;
+            GetPrivateProfileString("SoftFunction", "JGandRSUInSameLocation", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            JGandRSUInSameLocation = temp.ToString().Equals("0") ? false : true;
+
+            GetPrivateProfileString("Alarmconfig", "AlarmCom", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.g_sComofAlarm = temp.ToString();
+
+            GetPrivateProfileString("Alarmconfig", "AlarmTime", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.g_iTime0fAlarm = Convert.ToInt16(temp.ToString());
+
+            GetPrivateProfileString("JGLocationSet", "ZxDisWithOBY", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.ZxTempValue = Convert.ToInt16(temp.ToString());
+            GetPrivateProfileString("JGLocationSet", "FxDisWithOBY", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.FxTempValue = Convert.ToInt16(temp.ToString());
+
+            GetPrivateProfileString("DisCarTypeSet", "DisFirstTypeHigh", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisFirst_H = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("DisCarTypeSet", "DisFirstTypeLength", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisFirst_L = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("DisCarTypeSet", "DisSecondTypeHigh", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisSecond_H = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("DisCarTypeSet", "DisSecondTypeLength", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisSecond_L = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("DisCarTypeSet", "DisThirdTypeHigh", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisThird_H = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("DisCarTypeSet", "DisThirdTypeLength", "255", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisThird_L = Convert.ToUInt16(temp.ToString());
+
+            GetPrivateProfileString("CarTypeFourExpSet", "DisFourTypeHigherThanH", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisFourHigherthan_H = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("CarTypeFourExpSet", "DisFourTypeHighandLengthH", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisFourHighandLength_H = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("CarTypeFourExpSet", "DisFourTypeHighandLengthL", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisFourHighandLength_L = Convert.ToUInt16(temp.ToString());
+
+            GetPrivateProfileString("LargeTypeOneSet", "DisLargeTypeOneHigh", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisLargeTypeOne_H = Convert.ToUInt16(temp.ToString());
+            GetPrivateProfileString("LargeTypeOneSet", "DisLargeTypeOneLength", "异常", temp, 255, AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "config.ini");
+            GlobalMember.DisLargeTypeOne_L = Convert.ToUInt16(temp.ToString());
+
+
+
         }
         private void btnReadConfig_Click(object sender, EventArgs e)
         {
@@ -342,10 +412,19 @@ namespace ETCF
             }
             try
             {
-                //数据库连接
                 connStr = @"Server=" + sql_ip + ";uid=" + sql_username + ";pwd=" + sql_password + ";database=" + sql_dbname;
-                GlobalMember.SQLInter = new SQLServerInter(this, sql_dbname, sql_ip,sql_username, sql_password,connStr);
-                GlobalMember.SQLInter.SQLInit();
+                //数据库连接
+                if (GlobalMember.SqlType.Equals("SQLServer"))
+                { 
+                    GlobalMember.SQLInter = new SQLServerInter(this, sql_dbname, sql_ip, sql_username, sql_password, connStr);
+                    GlobalMember.SQLInter.SQLInit();
+                }
+                else
+                {
+                    GlobalMember.MysqlInter = new MysqlInter(this, sql_dbname, sql_ip, sql_username, sql_password, sql_port, connStr);
+                    GlobalMember.MysqlInter.MysqlInit();
+                }
+                
                 //SQLInit();
             }
             catch (Exception ex)
@@ -366,6 +445,7 @@ namespace ETCF
             ProtectPro();
             //数据接收线程
             SocketHelper.pushSockets = new SocketHelper.PushSockets(Rec);
+
             //数据解析线程
             ResThread();
             //数据入库
@@ -373,8 +453,11 @@ namespace ETCF
             //定时心跳
             timer1.Start();
 
+            labelLaneNo.Text = "车道号："+GlobalMember.g_sLaneNo;
             //开启监控程序
-            StartProtect.StartPro();
+            //StartProtect.StartPro();
+            //开启激光心跳线程
+            ActiveJGHeart();
             
         }
 
@@ -481,10 +564,10 @@ namespace ETCF
         {
             try
             {
-                this.Invoke(new ThreadStart(delegate
+                this.BeginInvoke(new ThreadStart(delegate
                 {
 
-                    if (dataGridViewRoll.Rows.Count > 500)
+                    if (dataGridViewRoll.Rows.Count > 30)
                     {
                         dataGridViewRoll.Rows.Clear();
                     }
@@ -535,7 +618,7 @@ namespace ETCF
                     this.dataGridViewRoll.Rows[index].Cells[13].Value = s_CamPicPath;
                     this.dataGridViewRoll.Rows[index].Cells[13].Style.ForeColor = Color.Black;
 
-                    this.dataGridViewRoll.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;//显示最新一行
+                    this.dataGridViewRoll.FirstDisplayedScrollingRowIndex = dataGridViewRoll.RowCount - 1;//显示最新一行
                     
 
                 }));
@@ -777,12 +860,17 @@ namespace ETCF
         {
             RSUTcpClient.InitSocket(s_Rsuip, Convert.ToInt32(s_Rsuport));
             RSUTcpClient.Start();
+            //SocketHelper.pushSockets = new SocketHelper.PushSockets(Rec);
+            //RSUTcpClient.ReceiveData += new SocketHelper.TcpClients.ReceiveEventHander();
+                
             IsConnRSU = true;
         }
         
         #endregion
 
         #region******专用接收线程******
+        
+
         //通用接收，接入缓存
         private void Rec(SocketHelper.Sockets sks)
         {
@@ -824,6 +912,10 @@ namespace ETCF
                     }
                     else
                     {
+                        if(sks.RecBuffer[3] == 0xA4)
+                        {
+                            TcpReply(0xA4, 0x00, RSUTcpClient);
+                        }
                         //写日志放后面去
                         if (sks.RecBuffer[3] != 0xD9 && sks.RecBuffer[3] != 0x9D)
                         {
@@ -999,7 +1091,31 @@ namespace ETCF
             queueThread.Priority = ThreadPriority.Normal;
             queueThread.Start();
         }
-       
+        //处理激光心跳的线程
+        public void ActiveJGHeart()
+        {
+            HeartAct = new Thread(ActiveJGheart);
+            HeartAct.IsBackground = true;
+            HeartAct.Priority = ThreadPriority.Normal;
+            HeartAct.Start();
+        }
+
+        public void ActiveJGheart()
+        {
+            //发送激光心跳
+            while (true)
+            {
+                if (GlobalMember.isDeedJGHeart)
+                {
+                    TcpReply(0x9D, 0x00, JGTcpClient);
+                    GlobalMember.isDeedJGHeart = false;
+                }
+                Thread.Sleep(1000);
+            }
+            
+            
+        }
+
         //第三版本数据匹配逻辑
         public void QueueDataHanderFun3()
         {
@@ -1007,16 +1123,25 @@ namespace ETCF
             while (true)
             {
                 //根据拦截模式是否开启，选择不同的匹配逻辑
-
-                //稽查模式匹配逻辑
-                if (isOpenStoptype.Checked)
+                if (JGandRSUInSameLocation)
                 {
-                    stp.StartStoptype(qRSUData, qJGData, sql_dbname);
+                    //同杆只有稽查模式
+                    stp.StartJiChaType(qRSUData, qJGData, sql_dbname);
                 }
                 else
                 {
-                    stp.StartJiChaType(qRSUData, qJGData, sql_dbname);
+                    if (isOpenStoptype.Checked)
+                    {
+                        //带位置的拦截模式
+                        stp.StartStoptypeWithLocation(qRSUData, qJGData, sql_dbname);
+                    }
+                    else
+                    {
+                        //带位置的稽查模式
+                        stp.JiChaTypeWithLocation(qRSUData, qJGData, sql_dbname);
+                    }
                 }
+                
                 Thread.Sleep(10);
             }
         }
@@ -1041,6 +1166,76 @@ namespace ETCF
                 {
                     m_sJGCarType = m_sOBUCarType;
                     sZuobiString = "正常通车";
+                    //检索黑白名单.以下为暂时测试用
+                    //如果开启了拦截模式，进行黑白名单检索
+                    if (isOpenStoptype.Checked)
+                    {
+                        Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 这个时候开始查询黑白名单 " + "\r\n");
+                        //查询黑白名单
+                        bool isZuobi=false;
+                        if (GlobalMember.SqlType.Equals("SQLServer"))
+                        {
+                            isZuobi = GlobalMember.SQLInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
+                        }
+                        else
+                        {
+                            isZuobi = GlobalMember.MysqlInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
+                        }
+                         
+                        Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 这个时候已经查完啦 " + "\r\n");
+                        if (isZuobi)
+                        {
+                            switch (ShutType)
+                            {
+                                case 0:
+                                    //普通车辆，不做任何操作，继续交易
+                                    //TcpReply(0xA4, 01, RSUTcpClient);
+                                    break;
+                                case 1:
+                                    //白名单 继续交易
+                                    //TcpReply(0xA4, 01, RSUTcpClient);
+                                    break;
+                                case 2:
+                                    //先通知天线终止交易
+                                    Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 这个时候开始准备写数据库啦 " + "\r\n");
+                                    //TcpReply(0xA4, 02, RSUTcpClient);
+                                    //启动报警器
+                                    //Alarm();
+                                    //写入黑白名单
+                                    string InsertString = @"Insert into " + sql_dbname
+                                        + ".dbo.ShutTable(JGCarType,OBUCarType,ForceTime,CamPlateColor,CamPlateNum,CamPicPath,"
+                                        + "OBUPlateColor,OBUPlateNum,TradeTime,InputTime,CarFlag) values('"
+                                        + m_CarFullInfo.sJGCarType + "','" + m_CarFullInfo.sOBUCartype + "','" + m_CarFullInfo.sJGDateTime + "','"
+                                        + m_CarFullInfo.sCamPlateColor + "','" + m_CarFullInfo.sCamPlateNum + "','"
+                                        + m_CarFullInfo.sCamPicPath + "','" + m_CarFullInfo.sOBUPlateColor + "','"
+                                        + m_CarFullInfo.sOBUPlateNum + "','" + m_CarFullInfo.sOBUDateTime + "','"
+                                        + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "','" + (ShutType - 3).ToString() + "')";
+                                    if (GlobalMember.SqlType.Equals("SQLServer"))
+                                    {
+                                        GlobalMember.SQLInter.UpdateSQLData(InsertString);
+                                    }
+                                    else
+                                    {
+                                        GlobalMember.MysqlInter.UpdateSQLData(InsertString);
+                                    }
+                                    
+                                    Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 这个时候数据库写完啦 " + "\r\n");
+                                    break;
+                                case 3:
+                                    //查询异常 继续交易
+                                    //TcpReply(0xA4, 01, RSUTcpClient);
+                                    break;
+                                default:
+                                    //-1,-2
+                                    //先通知天线控制器终止交易
+                                    //TcpReply(0xA4, 02, RSUTcpClient);
+                                    //启动报警器
+                                    //Alarm();
+                                    break;
+                            }
+                        }
+                        Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 返回得到结果，标识位： " + ShutType.ToString() + "\r\n");
+                    }
                 }
                 else
                 {
@@ -1051,45 +1246,61 @@ namespace ETCF
                     {
                         Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 已经完成匹配，开始查询黑白名单 "  + "\r\n");
                         //查询黑白名单
-                        bool isZuobi=GlobalMember.SQLInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
+                        bool isZuobi=false;
+                        if (GlobalMember.SqlType.Equals("SQLServer"))
+                        {
+                            isZuobi = GlobalMember.SQLInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
+                        }
+                        else
+                        {
+                            isZuobi = GlobalMember.MysqlInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
+                        }
                         if (isZuobi)
                         {
                             switch (ShutType)
                             { 
                                 case 0:
                                     //普通车辆，不做任何操作，继续交易
-                                    //TcpReply(0xD6, 00, RSUTcpClient);
+                                    TcpReply(0xA4, 01, RSUTcpClient);
                                     break;
                                 case 1:
                                     //白名单 继续交易
-                                    //TcpReply(0xD6, 00, RSUTcpClient);
+                                    TcpReply(0xA4, 01, RSUTcpClient);
                                     break;
                                 case 2:
                                     //先通知天线终止交易
-                                    //TcpReply(0xD6, 01, RSUTcpClient);
+                                    TcpReply(0xA4, 02, RSUTcpClient);
                                     //启动报警器
                                     //Alarm();
                                     //写入黑白名单
                                     string InsertString = @"Insert into " + sql_dbname
-                                        + ".dbo.ShutTable(JGCarType,ForceTime,CamPlateColor,CamPlateNum,CamPicPath,"
+                                        + ".dbo.ShutTable(JGCarType,OBUCarType,ForceTime,CamPlateColor,CamPlateNum,CamPicPath,"
                                         +"OBUPlateColor,OBUPlateNum,TradeTime,InputTime,CarFlag) values('"
-                                        + m_CarFullInfo.sJGCarType + "','" + m_CarFullInfo.sJGDateTime + "','"
+                                        + m_CarFullInfo.sJGCarType + "','" + m_CarFullInfo.sOBUCartype + "','" + m_CarFullInfo.sJGDateTime + "','"
                                         + m_CarFullInfo.sCamPlateColor + "','" + m_CarFullInfo.sCamPlateNum + "','"
                                         + m_CarFullInfo.sCamPicPath + "','" + m_CarFullInfo.sOBUPlateColor + "','" 
                                         + m_CarFullInfo.sOBUPlateNum + "','" + m_CarFullInfo.sOBUDateTime + "','"
                                         + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "','" + (ShutType-3).ToString() + "')";
-                                    GlobalMember.SQLInter.UpdateSQLData(InsertString);
+                                    if (GlobalMember.SqlType.Equals("SQLServer"))
+                                    {
+                                        GlobalMember.SQLInter.UpdateSQLData(InsertString);
+                                    }
+                                    else
+                                    {
+                                        GlobalMember.MysqlInter.UpdateSQLData(InsertString);
+                                    }
                                     break;
                                 case 3:
                                     //查询异常 继续交易
-                                    //TcpReply(0xD6, 00, RSUTcpClient);
+                                    TcpReply(0xA4, 01, RSUTcpClient);
                                     break;
                                 default:
                                     //-1,-2
                                     //先通知天线控制器终止交易
-                                    //TcpReply(0xD6, 01, RSUTcpClient);
+                                    TcpReply(0xA4, 02, RSUTcpClient);
                                     //启动报警器
-                                    //Alarm();
+                                    Thread thread1 = new Thread(new ThreadStart(Alarm));
+                                    thread1.Start();
                                     break;
                             }
                         }
@@ -1104,18 +1315,51 @@ namespace ETCF
             plateNoshow(m_sOBUPlateNum, m_sOBUCarType, m_sCamPlateNum, m_sJGCarType, m_sCarCount);
             return sZuobiString;
         }
-        
-        //判断是否作弊（用于拦截模式）
-        public bool isZuobi(string m_sOBUCarType, string m_sJGCarType, string m_OBUPlateNum,ref string isZuobiString)
+        //单纯的显示主界面，更新图片
+        public void MarchedShow(string m_sOBUCarType, string m_sOBUPlateNum, string m_sJGCarType, string m_sCamPlateNum, string m_sPicPath, string m_sCarCount)
         {
-            int res = 0;
-            bool isCarZuoBi = false;
-            isZuobiString = "";
+            if (m_sPicPath != "未知" && m_sPicPath != "" && m_sPicPath != null)
+            {
+                pictureBoxVehshow(m_sPicPath);//显示图片
+            }
+            plateNoshow(m_sOBUPlateNum, m_sOBUCarType, m_sCamPlateNum, m_sJGCarType, m_sCarCount);
+        }
+        //判断是否作弊（用于拦截模式）
+        public bool isZuobi(string m_OBUPlateNum)
+        {
+            int ShutType = 0;
+            //如果开启了拦截模式，进行黑白名单检索
+            if (isOpenStoptype.Checked)
+            {
+                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 这个时候开始查询黑白名单 " + "\r\n");
+                //查询黑白名单
+                bool isZuobi = false;
+                if (GlobalMember.SqlType.Equals("SQLServer"))
+                {
+                    isZuobi = GlobalMember.SQLInter.FindBlackOrWhiteCar(m_OBUPlateNum, ref ShutType);
+                }
+                else
+                {
+                    isZuobi = GlobalMember.MysqlInter.FindBlackOrWhiteCar(m_OBUPlateNum, ref ShutType);
+                }
+                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 这个时候已经查完啦 " + "\r\n");
+                if (isZuobi)
+                {
+                    return true;
+                }   
+            }
+            return false;
+        }
+        //判断是否作弊，重载
+        public string isZuobi(string m_sOBUCarType, string m_sOBUPlateNum, string m_sJGCarType, AllInfo m_allinfo,ref int ShutType)
+        {
+            ShutType = 0;
+            string sZuobiString = "";
             int iJGCarType = 0;
             int iOBUCarType = 0;
             if (m_sJGCarType == "未知" || m_sJGCarType == "未检测" || m_sJGCarType == "" || m_sJGCarType == null)
             {
-                isZuobiString = "作弊未知";
+                sZuobiString = "作弊未知";
                 iJGCarType = 0;
                 iOBUCarType = Convert.ToInt16(m_sOBUCarType.Substring(1));
             }
@@ -1126,43 +1370,103 @@ namespace ETCF
                 if (iJGCarType <= iOBUCarType)
                 {
                     m_sJGCarType = m_sOBUCarType;
-                    isZuobiString = "正常通车";
-                    return false;
+                    sZuobiString = "正常通车";
+                    TcpReply(0xA4, 01, RSUTcpClient);
                 }
                 else
                 {
-                    isZuobiString = "可能作弊";
-                    //检索黑白名单
-                    //如果开启了拦截模式，进行黑白名单检索
-                    if (isOpenStoptype.Checked)
+                    if ((NotStopNear && (Math.Abs(iJGCarType - iOBUCarType) == 1))
+                        || (iOBUCarType == 3 && iJGCarType == 4 && NotStopBetween3And4)
+                        || (NotStopWhite && m_allinfo.sOBUPlateColor.Equals("白色")))
                     {
-                        //查询黑白名单
-                        try
+                        sZuobiString = "情况允许";
+                        TcpReply(0xA4, 01, RSUTcpClient);
+                        //TcpReply(0xD6, 00, RSUTcpClient);
+                    }
+                    else
+                    {
+                        sZuobiString = "可能作弊";
+                        //检索黑白名单
+                        //如果开启了拦截模式，进行黑白名单检索
+                        if (isOpenStoptype.Checked)
                         {
-                            isCarZuoBi = GlobalMember.SQLInter.FindBlackOrWhiteCar(m_OBUPlateNum, ref res);
-                        }
-                        catch (Exception)
-                        {
-
-                        }
-                        finally
-                        {
-                            if (isCarZuoBi)
+                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 已经完成匹配，开始查询黑白名单 " + "\r\n");
+                            //查询黑白名单
+                            bool isZuobi = false;
+                            if (GlobalMember.SqlType.Equals("SQLServer"))
                             {
-                                //启动报警器
+                                isZuobi = GlobalMember.SQLInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
                             }
                             else
-                            { 
-                                //不启动
+                            {
+                                isZuobi = GlobalMember.MysqlInter.FindBlackOrWhiteCar(m_sOBUPlateNum, ref ShutType);
                             }
+                            if (isZuobi)
+                            {
+                                switch (ShutType)
+                                {
+                                    case 0:
+                                        //普通车辆，不做任何操作，继续交易
+                                        TcpReply(0xA4, 01, RSUTcpClient);
+                                        break;
+                                    case 1:
+                                        //白名单 继续交易
+                                        TcpReply(0xA4, 01, RSUTcpClient);
+                                        break;
+                                    case 2:
+                                        //先通知天线终止交易
+                                        //TcpReply(0xA4, 02, RSUTcpClient);
+                                        //启动报警器
+                                        //Alarm();
+                                        //写入黑白名单
+                                        
+                                     if (GlobalMember.SqlType.Equals("SQLServer"))
+                                    {
+                                        string InsertString = @"Insert into " + sql_dbname
+                                        + ".dbo.ShutTable(JGCarType,ForceTime,CamPlateColor,CamPlateNum,CamPicPath,"
+                                        + "OBUPlateColor,OBUPlateNum,TradeTime,InputTime,CarFlag) values('"
+                                        + m_allinfo.sJGCarType + "','" + m_allinfo.sJGDateTime + "','"
+                                        + m_allinfo.sCamPlateColor + "','" + m_allinfo.sCamPlateNum + "','"
+                                        + m_allinfo.sCamPicPath + "','" + m_allinfo.sOBUPlateColor + "','"
+                                        + m_allinfo.sOBUPlateNum + "','" + m_allinfo.sOBUDateTime + "','"
+                                        + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "','" + (ShutType - 3).ToString() + "')";
+                                        GlobalMember.SQLInter.UpdateSQLData(InsertString);
+                                    }
+                                    else
+                                    {
+                                        string InsertString = @"Insert into ShutTable(JGCarType,ForceTime,CamPlateColor,CamPlateNum,CamPicPath,"
+                                        + "OBUPlateColor,OBUPlateNum,TradeTime,InputTime,CarFlag) values('"
+                                        + m_allinfo.sJGCarType + "','" + m_allinfo.sJGDateTime + "','"
+                                        + m_allinfo.sCamPlateColor + "','" + m_allinfo.sCamPlateNum + "','"
+                                        + m_allinfo.sCamPicPath + "','" + m_allinfo.sOBUPlateColor + "','"
+                                        + m_allinfo.sOBUPlateNum + "','" + m_allinfo.sOBUDateTime + "','"
+                                        + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "','" + (ShutType - 3).ToString() + "')";
+                                        GlobalMember.MysqlInter.UpdateSQLData(InsertString);
+                                    }
+                                        break;
+                                    case 3:
+                                        //查询异常 继续交易
+                                        TcpReply(0xA4, 01, RSUTcpClient);
+                                        break;
+                                    default:
+                                        //-1,-2
+                                        //先通知天线控制器终止交易
+                                        //TcpReply(0xA4, 02, RSUTcpClient);
+                                        //启动报警器
+                                        //Alarm();
+                                        break;
+                                }
+                            }
+                            Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 返回得到结果，标识位： " + ShutType.ToString() + "\r\n");
                         }
-                    }                   
+                    }
                 }
-                return true;
             }
-            return false;
+            return sZuobiString;
         }
         //数据处理函数
+        Thread handerJGCam = null;
+        //public delegate void ParameterizedThreadStart(byte[] databuff, int bufflen);
         private void PreprocessRecvData(byte[] p_pBuffer, int p_nLen)//
         {
             int ret = datah.DataEncoding(ref p_pBuffer, ref p_nLen);
@@ -1178,6 +1482,13 @@ namespace ETCF
                     Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 激光数据81帧解包完成 " + "\r\n");
                     TcpReply(0x18,0x00, JGTcpClient);
                     HanderJGData(p_pBuffer, p_nLen);
+                    break;
+                case 0x83:
+                    //激光数据（拦截模式）
+                    HeartJGCount = 0;
+                    Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 激光数据83帧解包完成 " + "\r\n");
+                    //TcpReply(0x83, 0x00, JGTcpClient);
+                    HanderJGMainData(p_pBuffer, p_nLen);
                     break;
                 case 0x9D:
                     //RSU的心跳
@@ -1199,12 +1510,21 @@ namespace ETCF
                     TcpReply(0xD7,0x00, RSUTcpClient);
                     HanderRSUData(p_pBuffer, p_nLen);
                     break;
+                case 0x4A:
+                    //ETC数据(拦截模式下)
+                    GlobalMember.g_TimeForTest = DateTime.Now;
+                    HeartRSUCount = 0;
+                    HanderRSUData(p_pBuffer, p_nLen);
+                    break;
                 case 0x82:
                     //通知摄像机即将抓拍
                     HeartJGCount = 0;
                     try
                     {
-                        HanderJGStartCam(p_pBuffer, p_nLen);
+                        //使用线程防止82帧占用主线程时间
+                        handerJGCam = new Thread(() => HanderJGStartCam(p_pBuffer, p_nLen));
+                        handerJGCam.Start();
+                        //HanderJGStartCam(p_pBuffer, p_nLen);
                     }
                     catch(Exception ex)
                     {
@@ -1215,7 +1535,7 @@ namespace ETCF
                     break;
             }
         }
-
+        //保存收到的位置数据，一般只用于测试，正常模式下，该功能不适用
         public void SaveLocation(byte[] buffer, int bufferlen)
         {
             string ss = "";
@@ -1234,7 +1554,7 @@ namespace ETCF
                 location = "";
             }
         }
-
+        //回复帧，输入主命令号，副命令号，和对应要发送的Socket
         public void TcpReply(byte command,byte secondcom, SocketHelper.TcpClients sk)
         {
 
@@ -1268,7 +1588,7 @@ namespace ETCF
             }
 
         }
-
+        //适用于稽查模式下的发送位置数据
         public void SendLocation(ushort obuy, long randCode)
         {
             int send_lenth = 0;
@@ -1299,12 +1619,43 @@ namespace ETCF
             }
             catch (Exception ex)
             {
-                AddOperLogCacheStr("发送位置异常" + ex.ToString());
+                AddOperLogCacheStr("发送位置A异常" + ex.ToString());
+            }
+        }
+        //重载，发送位置，这里适用于拦截模式的发送位置数据
+        public void SendLocation(ushort obuy)
+        {
+            int send_lenth = 0;
+            byte[] send_buffer;
+            send_buffer = new byte[100];
+            send_buffer[send_lenth++] = 0x38;
+            send_buffer[send_lenth++] = (byte)(obuy >> 8);
+            send_buffer[send_lenth++] = (byte)(obuy);
+            datah.DataCoding(ref send_buffer, ref send_lenth);
+            if (IsConnJG == false)
+                return;
+            try
+            {
+                string sss = "";
+                JGTcpClient.SendByteData(send_buffer, send_lenth);
+                HeartRSUCount = 0;
+                for (int i = 0; i < send_lenth; i++)
+                {
+                    sss += send_buffer[i].ToString("X2");
+                    sss += " ";
+                }
+                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 发送位置:" + sss + "\r\n");
+
+            }
+            catch (Exception ex)
+            {
+                AddOperLogCacheStr("发送位置B异常" + ex.ToString());
             }
         }
         #endregion
 
         #region******激光数据解析与加入队列******
+        //一般稽查模式下的激光入栈数据
         public void HanderJGData(byte[] databuff, int bufflen)
         {
            
@@ -1333,7 +1684,7 @@ namespace ETCF
             }
             m_qJG.qJGCarType = databuff[5 + st].ToString();
             m_qJG.qJGLength = ((ushort)(databuff[9 + st] << 8 | databuff[10 + st])).ToString();
-            m_qJG.qJGWide = ((ushort)(databuff[11 + st] << 8 | databuff[12 + st])).ToString();
+            m_qJG.qJGHigh = ((ushort)(databuff[11 + st] << 8 | databuff[12 + st])).ToString();
             m_qJG.qJGDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff");
             m_qJG.qJGRandCode = (long)(databuff[13 + st] << 24 | databuff[14 + st] << 16 | databuff[15 + st] << 8 | databuff[16 + st]);
             //1~4 客1~4；5~11 货1~5
@@ -1378,7 +1729,7 @@ namespace ETCF
             }
             Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "  激光入栈" 
                 +"车牌："+ m_qJG.qCamPlateNum +"车型"+m_qJG.qJGCarType+"车长："+m_qJG.qJGLength+"车高："
-                +m_qJG.qJGWide+"车标："+m_qJG.qCambiao+"激光ID"+m_qJG.qJGId+"随机码："+m_qJG.qJGRandCode.ToString("X2")+ "\r\n");
+                +m_qJG.qJGHigh+"车标："+m_qJG.qCambiao+"激光ID"+m_qJG.qJGId+"随机码："+m_qJG.qJGRandCode.ToString("X2")+ "\r\n");
             //Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 激光入栈原始数据：" + ss + "\r\n");
             Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "激光数据81帧解析并入栈完成 " + "\r\n");
             lock (qJGData)
@@ -1387,16 +1738,90 @@ namespace ETCF
             }
             jg_inQueueDone.Set();
         }
+
+        //拦截模式下，激光处理全位置数据并入栈
+        HanderJGDataToQueue HJGDataToQ = new HanderJGDataToQueue();
+        public void HanderJGMainData(byte[] databuff, int bufflen)
+        {
+            string ss = "";
+            for (int i = 0; i < bufflen; i++)
+            {
+                ss += databuff[i].ToString("X2");
+                ss += " ";
+            }
+            AddOperLogCacheStr("收到激光主数据" + ss);
+            QueueJGData m_qJG = new QueueJGData();
+            //车道内车的数量
+            m_qJG.qJGListNum = databuff[4];
+            NumInJGList = m_qJG.qJGListNum;
+            byte[] JGList = new byte[11];
+            for (int i = 0; i < NumInJGList; i++)
+            {
+                System.Buffer.BlockCopy(databuff, i*11+5, JGList, 0, 11);
+                m_qJG = HJGDataToQ.HanderJGDataIn(JGList, 11);
+                lock (listJGMain)
+                {
+                    listJGMain.Add(new JGMainList(m_qJG.qJGId, m_qJG.qJGLocation, m_qJG.qJGLength, m_qJG.qJGHigh, m_qJG.qJGGetPic, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff")));
+                }
+            }
+            
+            JGMainDone.Set();
+        }
+
+
         #endregion
 
         #region******通知摄像机抓拍******
         public void HanderJGStartCam(byte[] databuff, int bufflen)
         {
+            byte[] sb1 = new byte[2];
+            sb1[0] = 0xc1;
+            sb1[1] = 0x00;
+            
+            //JGTcpClient.SendByteData(sb1, 2);
+            
             Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "  收到82帧摄像机抓拍命令"+ "\r\n");
             int st = 2;
             QueueJGData m_qJG = new QueueJGData();
             bool match_flag = false;//匹配标识
             m_qJG.qJGId = ((ushort)(databuff[3 + st] << 8 | databuff[4 + st])).ToString();
+            m_qJG.qJGCarType = "客"+databuff[5 + st].ToString();
+            m_qJG.qJGLength = ((ushort)(databuff[9 + st] << 8 | databuff[10 + st])).ToString();
+            m_qJG.qJGHigh = ((ushort)(databuff[11 + st] << 8 | databuff[12 + st])).ToString();
+            m_qJG.qJGDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff");
+            
+            //m_qJG.qJGRandCode = (long)(databuff[13 + st] << 24 | databuff[14 + st] << 16 | databuff[15 + st] << 8 | databuff[16 + st]);
+            if (OpenForce.Checked && CameraType == "IPC")
+            {
+                //IPC启用强制抓拍
+                //由于IPC软触发也是回调，所以不能放入下面流程去
+                sb1[0] = 0xc2;
+                JGTcpClient.SendByteData(sb1, 2);
+                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "  开始软触发" + "\r\n");
+                GlobalMember.IPCCameraInter.ForceGetPic();
+                //JGTcpClient.SendByteData(sb1, 2);
+                Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "  开始等待摄像机完成信号量" + "\r\n");
+                CameraPicture.Reset();
+                CameraCanpost.Set();
+                if (CameraPicture.WaitOne(1200))
+                {
+                    sb1[0] = 0xc3;
+                    //JGTcpClient.SendByteData(sb1, 2);
+                    Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "  摄像机信号量已完成" + "\r\n");
+                    match_flag = true;//匹配成功 
+                    if (CameraType == "IPC")
+                    {
+                        m_qJG.qCamPicPath = IPCCamera.imagepath;
+                    }
+                }
+                else
+                {
+                    Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "  摄像机信号量已超时" + "\r\n");
+                    match_flag = false;//匹配失败
+                    m_qJG.qCamPicPath = "未知";
+                }
+                CameraCanpost.Reset();
+            }
             if (OpenForce.Checked)
             {
                 if (CameraType == "HK")
@@ -1415,6 +1840,9 @@ namespace ETCF
                         AddOperLogCacheStr("强制抓拍失败");
                     }
                 }
+                
+                
+
             }
             else
             {
@@ -1552,7 +1980,7 @@ namespace ETCF
                 + "车牌：" + m_qJG.qCamPlateNum + "车标：" + m_qJG.qCambiao + "激光ID" + m_qJG.qJGId + "\r\n");
             lock (listCamInfo)
             {
-                if (listCamInfo.Count >= 5)
+                if (listCamInfo.Count >= 3)
                 {
                     try
                     {
@@ -1563,7 +1991,7 @@ namespace ETCF
                         Log.WriteLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") +" 摄像机清栈异常"+ex.ToString()+ "\r\n");
                     }
                 }
-                listCamInfo.Add(new CamList(m_qJG.qJGId, m_qJG.qCamPlateNum, m_qJG.qCamPlateColor,m_qJG.qCamPicPath,m_qJG.qCambiao));
+                listCamInfo.Add(new CamList(m_qJG.qJGId, m_qJG.qCamPlateNum, m_qJG.qCamPlateColor, m_qJG.qCamPicPath, m_qJG.qCambiao, m_qJG.qJGLength, m_qJG.qJGHigh, m_qJG.qJGCarType, m_qJG.qJGDateTime));
             }
         }
         #endregion
@@ -1673,26 +2101,52 @@ namespace ETCF
                 {
                     limit_select = " and TradeState='可能作弊'";
                 }
-                string CarSerch = "select * from " + sql_dbname + ".dbo.CarInfo where TradeTime > '" + this.dateStartTime.Value.ToString("yyyy-MM-dd HH:mm:ss:fff") + "' and TradeTime < '" + this.dateEndTime.Value.ToString("yyyy-MM-dd HH:mm:ss:fff") + "'" + limit_select + "  order by ID";//车道号
-
-                SqlDataReader sdr = SQLServerInter.ExecuteQuery(CarSerch);
-                bool flag1 = false;
-                while (sdr.Read())
+                if (GlobalMember.SqlType.Equals("SQLServer"))
                 {
-                    s_Id = sdr[0].ToString();
-                    s_RsuTradeTime = sdr[17].ToString();
-                    s_RsuPlateNum = sdr[11].ToString();
-                    s_RsuCarType = sdr[16].ToString();
-                    s_JgCarType = sdr[3].ToString();
-                    s_IsZuobi = sdr[18].ToString();
-                    s_JgLength = sdr[1].ToString();
-                    s_JgWide = sdr[2].ToString();
-                    s_CamPicPath = sdr[8].ToString();
-                    DelegateState.InsertGridview(s_Id, s_RsuTradeTime, s_RsuPlateNum, s_RsuCarType, s_JgCarType, s_IsZuobi, s_JgLength, s_JgWide, s_CamPicPath);
-                    flag1 = true;
+                    string CarSerch = "select * from " + sql_dbname + ".dbo.CarInfo where TradeTime > '" + this.dateStartTime.Value.ToString("yyyy-MM-dd HH:mm:ss:fff") + "' and TradeTime < '" + this.dateEndTime.Value.ToString("yyyy-MM-dd HH:mm:ss:fff") + "'" + limit_select + "  order by ID";//车道号
+                    SqlDataReader sdr = SQLServerInter.ExecuteQuery(CarSerch);
+                    bool flag1 = false;
+                    while (sdr.Read())
+                    {
+                        s_Id = sdr[0].ToString();
+                        s_RsuTradeTime = sdr[18].ToString();
+                        s_RsuPlateNum = sdr[11].ToString();
+                        s_RsuCarType = sdr[17].ToString();
+                        s_JgCarType = sdr[3].ToString();
+                        s_IsZuobi = sdr[19].ToString();
+                        s_JgLength = sdr[1].ToString();
+                        s_JgWide = sdr[2].ToString();
+                        s_CamPicPath = sdr[8].ToString();
+                        DelegateState.InsertGridview(s_Id, s_RsuTradeTime, s_RsuPlateNum, s_RsuCarType, s_JgCarType, s_IsZuobi, s_JgLength, s_JgWide, s_CamPicPath);
+                        flag1 = true;
+                    }
+                    if (flag1 == false)
+                        MessageBox.Show("查询完成，没有数据");
                 }
-                if (flag1 == false)
-                    MessageBox.Show("查询完成，没有数据");
+                else
+                {
+                    string CarSerch = "select * from CarInfo where TradeTime > '" + this.dateStartTime.Value.ToString("yyyy-MM-dd HH:mm:ss:fff") + "' and TradeTime < '" + this.dateEndTime.Value.ToString("yyyy-MM-dd HH:mm:ss:fff") + "'" + limit_select + "  order by ID";//车道号
+                    MySqlDataReader sdr = MysqlInter.MysqlExecuteQuery(CarSerch);
+                    bool flag1 = false;
+                    while (sdr.Read())
+                    {
+                        s_Id = sdr[0].ToString();
+                        s_RsuTradeTime = sdr[18].ToString();
+                        s_RsuPlateNum = sdr[11].ToString();
+                        s_RsuCarType = sdr[17].ToString();
+                        s_JgCarType = sdr[3].ToString();
+                        s_IsZuobi = sdr[19].ToString();
+                        s_JgLength = sdr[1].ToString();
+                        s_JgWide = sdr[2].ToString();
+                        s_CamPicPath = sdr[8].ToString();
+                        DelegateState.InsertGridview(s_Id, s_RsuTradeTime, s_RsuPlateNum, s_RsuCarType, s_JgCarType, s_IsZuobi, s_JgLength, s_JgWide, s_CamPicPath);
+                        flag1 = true;
+                    }
+                    sdr.Dispose();
+                    if (flag1 == false)
+                        MessageBox.Show("查询完成，没有数据");
+                }
+                
             }
             catch (SystemException ex)
             {
@@ -1713,9 +2167,14 @@ namespace ETCF
             HeartRSUCount++;
             //if (IsConnJG)
             //{
-            TcpReply(0x9D,0x00, JGTcpClient);
+            
             //}
             if (HeartJGCount >= 5)
+            {
+                GlobalMember.isDeedJGHeart = true;
+                //TcpReply(0x9D, 0x00, JGTcpClient);
+            }
+            if (HeartJGCount >= 25)
             {
                 IsConnJG = false;
                 //链接断开了
@@ -1723,7 +2182,7 @@ namespace ETCF
                 HeartJGCount = 0;
                 Log.WritePlateLog(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + " 激光控制器心跳检测超时，激光通信断开重连\r\n");
             }
-            if (HeartRSUCount >= 5)
+            if (HeartRSUCount >= 10)
             {
                 //IsConnRSU = false;
                 //rsu_sock.Close();
@@ -1747,7 +2206,7 @@ namespace ETCF
         private SerialPort comm = new SerialPort();//串口
         public void OpenCom()
         {
-            comm.PortName = "COM1";
+            comm.PortName =GlobalMember.g_sComofAlarm;
             comm.BaudRate = int.Parse("115200");
 
             try
@@ -1788,7 +2247,7 @@ namespace ETCF
             {
                 OpenCom();
                 RTSEnable();//声光灯报警
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(GlobalMember.g_iTime0fAlarm);
                 RTSDisable();
                 CloseCom();
             }
@@ -1816,6 +2275,140 @@ namespace ETCF
                                            "3", rd.Next().ToString(), rd.Next(3).ToString(),
                                            "1", "", "",
                                            "", "","","","");
+        }
+
+        private void animatedTabs1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (GlobalMember.isLogin)
+            {
+            }
+            else
+            {
+                if (animatedTabs1.SelectedIndex != 0)
+                {
+                    animatedTabs1.SelectedIndex = 0;
+                    frmLogin fml = new frmLogin();
+                    fml.Show();
+                }
+            }
+
+        }
+        //更新为白名单
+        private void btnInWhite_Click(object sender, EventArgs e)
+        {
+            SetBlackWhite(labelOBUPlateNum.Text, 1, "白名单");
+        }
+        //更新为黑名单
+        private void btnInBlack_Click(object sender, EventArgs e)
+        {
+            SetBlackWhite(labelOBUPlateNum.Text, -2, "黑名单");
+        }
+        //设置黑白名单
+        public void SetBlackWhite(string m_sOBUCarNum, int m_iCartye, string m_sBWString)
+        {
+            int UpdateOut = 1;
+            if (m_sOBUCarNum.Equals(""))
+            {
+                QQMessageBox.Show(
+                        this,
+                        "当前无目标车辆！",
+                        "提示",
+                        QQMessageBoxIcon.Warning,
+                        QQMessageBoxButtons.OK);
+            }
+            else
+            {
+                if (GlobalMember.SqlType.Equals("SQLServer"))
+                {
+                    UpdateOut = GlobalMember.SQLInter.UpdateBlackOrWhiteCar(m_sOBUCarNum, m_iCartye);
+                }
+                else
+                {
+                    UpdateOut = GlobalMember.MysqlInter.UpdateBlackOrWhiteCar(m_sOBUCarNum, m_iCartye);
+                }
+                if (UpdateOut == 0)
+                {
+                    QQMessageBox.Show(
+                        this,
+                        "修改为" + m_sBWString + "成功！",
+                        "提示",
+                        QQMessageBoxIcon.OK,
+                        QQMessageBoxButtons.OK);
+                }
+                else
+                {
+                    QQMessageBox.Show(
+                        this,
+                        "修改为" + m_sBWString + "失败！",
+                        "提示",
+                        QQMessageBoxIcon.Error,
+                        QQMessageBoxButtons.OK);
+                }
+            }
+        }
+        //设置按钮
+        private void btnconfig_Click(object sender, EventArgs e)
+        {
+            if (GlobalMember.isLogin)
+            {
+                animatedTabs1.SelectedIndex = 3;
+            }
+            else
+            {
+
+                frmLogin fml = new frmLogin();
+                fml.Show();
+                fml.Focus();
+                if (GlobalMember.isLogin)
+                {
+                    animatedTabs1.SelectedIndex = 3;
+                }
+
+            }
+        }
+        //实时数据表详细
+        private void dataGridViewRoll_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                int index = this.dataGridViewRoll.CurrentRow.Index;
+                string forcetime = (this.dataGridViewRoll.Rows[index].Cells[3].Value).ToString();//交易时间
+                string oplatenumber = (this.dataGridViewRoll.Rows[index].Cells[5].Value).ToString();//OBU车牌
+                string vehtype = (this.dataGridViewRoll.Rows[index].Cells[1].Value).ToString();//激光检测车辆型号
+                string ovehtype = (this.dataGridViewRoll.Rows[index].Cells[2].Value).ToString();//OBU的车型
+                string laser_vehlenth = (this.dataGridViewRoll.Rows[index].Cells[11].Value).ToString();//车长
+                string laser_vehheight = (this.dataGridViewRoll.Rows[index].Cells[12].Value).ToString();//车高
+                string imagepath = (this.dataGridViewRoll.Rows[index].Cells[13].Value).ToString();//图片路径
+                string getplateno = (this.dataGridViewRoll.Rows[index].Cells[6].Value).ToString();//摄像机识别车牌
+                GridDouclickShowPicDialog gdspd = new GridDouclickShowPicDialog(vehtype, getplateno, imagepath, forcetime, ovehtype, oplatenumber, laser_vehlenth, laser_vehheight, this);
+                gdspd.ShowDialog();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        //查询表双击事件
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                int index = this.dataGridView1.CurrentRow.Index;
+                string forcetime = (this.dataGridView1.Rows[index].Cells[1].Value).ToString();//交易时间
+                string oplatenumber = (this.dataGridView1.Rows[index].Cells[2].Value).ToString();//OBU车牌
+                string vehtype = (this.dataGridView1.Rows[index].Cells[4].Value).ToString();//激光检测车辆型号
+                string ovehtype = (this.dataGridView1.Rows[index].Cells[3].Value).ToString();//OBU的车型
+                string laser_vehlenth = (this.dataGridView1.Rows[index].Cells[6].Value).ToString();//车长
+                string laser_vehheight = (this.dataGridView1.Rows[index].Cells[7].Value).ToString();//车高
+                string imagepath = (this.dataGridView1.Rows[index].Cells[8].Value).ToString();//图片路径
+                string getplateno = System.IO.Path.GetFileName((this.dataGridView1.Rows[index].Cells[8].Value).ToString());//摄像机识别车牌
+                GridDouclickShowPicDialog gdspd = new GridDouclickShowPicDialog(vehtype, getplateno, imagepath, forcetime, ovehtype, oplatenumber, laser_vehlenth, laser_vehheight, this);
+                gdspd.ShowDialog();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

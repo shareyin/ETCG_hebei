@@ -15,8 +15,11 @@ namespace ETCF
     /// </summary>
     public class SocketHelper
     {
+        //public delegate void PushSockets(Sockets sockets);
+        //public static PushSockets pushSockets;
         public delegate void PushSockets(Sockets sockets);
         public static PushSockets pushSockets;
+
         
         
         /// <summary>
@@ -219,7 +222,7 @@ namespace ETCF
                         semap.Release();
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return;
                 }
@@ -409,6 +412,7 @@ namespace ETCF
 
         public class TcpClients : SocketObject
         {
+
             bool IsClose = false;
             /// <summary>
             /// 当前管理对象
@@ -437,6 +441,10 @@ namespace ETCF
             /// <summary>
             /// 初始化Socket
             /// </summary>
+            public delegate void ReceiveEventHander(object sender, byte[] buffer, int len);
+            public event ReceiveEventHander ReceiveData;
+
+            
             /// <param name="ipaddress"></param>
             /// <param name="port"></param>
             public override void InitSocket(string ipaddress, int port)
@@ -555,7 +563,10 @@ namespace ETCF
                         }
                         
                         s.Offset = s.nStream.EndRead(ir);
+
                         pushSockets.Invoke(s);//推送至UI
+                        //if (ReceiveData != null)
+                        //    ReceiveData(this, s.RecBuffer, s.Offset);
                         //s.nStream.BeginRead(s.RecBuffer, 0, s.RecBuffer.Length, new AsyncCallback(EndReader), s);
                         sk.nStream.BeginRead(sk.RecBuffer, 0, sk.RecBuffer.Length, new AsyncCallback(EndReader), sk);
                     }

@@ -8,7 +8,7 @@ namespace ETCF
     public class HanderRSUDataToQueue
     {
         public static int Count = 0;//接受ETC计数
-        long g_lUnixTime = 0x00000000;
+        //long g_lUnixTime = 0x00000000;
 
         #region******天线数据解析与加入队列******
         public QueueRSUData HanderRSUDataIn(byte[] databuff, int bufflen)
@@ -91,7 +91,7 @@ namespace ETCF
                     m_qRSU.qOBUCarType = "货7";
                     break;
                 default:
-                    m_qRSU.qOBUCarType = "未知";
+                    m_qRSU.qOBUCarType = "客0";
                     break;
             }
             Count++;

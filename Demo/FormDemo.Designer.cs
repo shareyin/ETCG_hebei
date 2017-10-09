@@ -35,26 +35,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             CCWin.SkinControl.Animation animation1 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDemo));
-            this.qqTextBox2 = new ControlExs.QQTextBox();
-            this.qqButton4 = new ControlExs.QQButton();
-            this.qqButton3 = new ControlExs.QQButton();
             this.querybutton = new ControlExs.QQButton();
-            this.qqButton1 = new ControlExs.QQButton();
-            this.qqButton6 = new ControlExs.QQButton();
-            this.qqButton7 = new ControlExs.QQButton();
             this.checkBox1 = new ControlExs.QQCheckBox();
-            this.qqRadioButton1 = new ControlExs.QQRadioButton();
-            this.qqGlassButton1 = new ControlExs.QQGlassButton();
-            this.imageButtonNext = new ControlExs.ImageButton();
-            this.imageButtonplayAndPause = new ControlExs.ImageButton();
-            this.imageButtonPrev = new ControlExs.ImageButton();
-            this.imageButtonStop = new ControlExs.ImageButton();
-            this.imageButton4 = new ControlExs.ImageButton();
-            this.imageButton3 = new ControlExs.ImageButton();
-            this.imageButton2 = new ControlExs.ImageButton();
-            this.imageButton1 = new ControlExs.ImageButton();
+            this.btnconfig = new ControlExs.QQGlassButton();
             this.animatedTabs1 = new CCWin.SkinControl.SkinTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.labelLaneNo = new System.Windows.Forms.Label();
+            this.btnInBlack = new ControlExs.ImageButton();
+            this.btnInWhite = new ControlExs.ImageButton();
             this.label26 = new System.Windows.Forms.Label();
             this.isOpenStoptype = new ETCF.myButtonCheck();
             this.label11 = new System.Windows.Forms.Label();
@@ -139,6 +127,21 @@
             this.btnSaveConfig = new System.Windows.Forms.Button();
             this.btnReadConfig = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.imageButton4 = new ControlExs.ImageButton();
+            this.imageButtonNext = new ControlExs.ImageButton();
+            this.qqRadioButton1 = new ControlExs.QQRadioButton();
+            this.imageButton2 = new ControlExs.ImageButton();
+            this.qqButton3 = new ControlExs.QQButton();
+            this.imageButtonplayAndPause = new ControlExs.ImageButton();
+            this.qqTextBox2 = new ControlExs.QQTextBox();
+            this.imageButtonPrev = new ControlExs.ImageButton();
+            this.imageButton1 = new ControlExs.ImageButton();
+            this.imageButtonStop = new ControlExs.ImageButton();
+            this.qqButton6 = new ControlExs.QQButton();
+            this.imageButton3 = new ControlExs.ImageButton();
+            this.qqButton1 = new ControlExs.QQButton();
+            this.qqButton7 = new ControlExs.QQButton();
+            this.qqButton4 = new ControlExs.QQButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBoxCam = new System.Windows.Forms.PictureBox();
@@ -152,17 +155,11 @@
             this.controltext = new System.Windows.Forms.TextBox();
             this.animator = new CCWin.SkinControl.SkinAnimator(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.qqGlassButton1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonNext)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonplayAndPause)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonPrev)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonStop)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnconfig)).BeginInit();
             this.animatedTabs1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInBlack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInWhite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVeh)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoll)).BeginInit();
@@ -175,51 +172,20 @@
             this.x.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonNext)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonplayAndPause)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonPrev)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonStop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton3)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxJG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRSU)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // qqTextBox2
-            // 
-            this.qqTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.animator.SetDecoration(this.qqTextBox2, CCWin.SkinControl.DecorationType.None);
-            this.qqTextBox2.EmptyTextTip = "这个是有水印的QQTextBox";
-            this.qqTextBox2.EmptyTextTipColor = System.Drawing.Color.DarkGray;
-            this.qqTextBox2.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqTextBox2.Location = new System.Drawing.Point(610, 82);
-            this.qqTextBox2.Name = "qqTextBox2";
-            this.qqTextBox2.Size = new System.Drawing.Size(213, 23);
-            this.qqTextBox2.TabIndex = 4;
-            // 
-            // qqButton4
-            // 
-            this.animator.SetDecoration(this.qqButton4, CCWin.SkinControl.DecorationType.None);
-            this.qqButton4.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqButton4.Image = ((System.Drawing.Image)(resources.GetObject("qqButton4.Image")));
-            this.qqButton4.Location = new System.Drawing.Point(377, 32);
-            this.qqButton4.Name = "qqButton4";
-            this.qqButton4.Size = new System.Drawing.Size(68, 56);
-            this.qqButton4.TabIndex = 22;
-            this.qqButton4.Text = "更新";
-            this.qqButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.qqButton4.UseVisualStyleBackColor = true;
-            // 
-            // qqButton3
-            // 
-            this.animator.SetDecoration(this.qqButton3, CCWin.SkinControl.DecorationType.None);
-            this.qqButton3.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqButton3.Image = ((System.Drawing.Image)(resources.GetObject("qqButton3.Image")));
-            this.qqButton3.Location = new System.Drawing.Point(610, 111);
-            this.qqButton3.Name = "qqButton3";
-            this.qqButton3.Size = new System.Drawing.Size(68, 23);
-            this.qqButton3.TabIndex = 21;
-            this.qqButton3.Text = "删除";
-            this.qqButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.qqButton3.UseVisualStyleBackColor = true;
-            this.qqButton3.Click += new System.EventHandler(this.qqButton3_Click);
             // 
             // querybutton
             // 
@@ -235,47 +201,12 @@
             this.querybutton.UseVisualStyleBackColor = true;
             this.querybutton.Click += new System.EventHandler(this.querybutton_Click);
             // 
-            // qqButton1
-            // 
-            this.animator.SetDecoration(this.qqButton1, CCWin.SkinControl.DecorationType.None);
-            this.qqButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqButton1.Image = ((System.Drawing.Image)(resources.GetObject("qqButton1.Image")));
-            this.qqButton1.Location = new System.Drawing.Point(865, 6);
-            this.qqButton1.Name = "qqButton1";
-            this.qqButton1.Size = new System.Drawing.Size(72, 56);
-            this.qqButton1.TabIndex = 19;
-            this.qqButton1.Text = "修改";
-            this.qqButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.qqButton1.UseVisualStyleBackColor = true;
-            this.qqButton1.Click += new System.EventHandler(this.qqButton1_Click);
-            // 
-            // qqButton6
-            // 
-            this.animator.SetDecoration(this.qqButton6, CCWin.SkinControl.DecorationType.None);
-            this.qqButton6.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqButton6.Location = new System.Drawing.Point(792, 599);
-            this.qqButton6.Name = "qqButton6";
-            this.qqButton6.Size = new System.Drawing.Size(68, 23);
-            this.qqButton6.TabIndex = 24;
-            this.qqButton6.Text = "确定";
-            this.qqButton6.UseVisualStyleBackColor = true;
-            // 
-            // qqButton7
-            // 
-            this.animator.SetDecoration(this.qqButton7, CCWin.SkinControl.DecorationType.None);
-            this.qqButton7.Enabled = false;
-            this.qqButton7.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqButton7.Location = new System.Drawing.Point(869, 599);
-            this.qqButton7.Name = "qqButton7";
-            this.qqButton7.Size = new System.Drawing.Size(68, 23);
-            this.qqButton7.TabIndex = 25;
-            this.qqButton7.Text = "禁止";
-            this.qqButton7.UseVisualStyleBackColor = true;
-            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.animator.SetDecoration(this.checkBox1, CCWin.SkinControl.DecorationType.None);
             this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.checkBox1.Location = new System.Drawing.Point(793, 7);
@@ -285,161 +216,22 @@
             this.checkBox1.Text = "只查询作弊车";
             this.checkBox1.UseVisualStyleBackColor = false;
             // 
-            // qqRadioButton1
+            // btnconfig
             // 
-            this.qqRadioButton1.AutoSize = true;
-            this.qqRadioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.qqRadioButton1.Checked = true;
-            this.animator.SetDecoration(this.qqRadioButton1, CCWin.SkinControl.DecorationType.None);
-            this.qqRadioButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqRadioButton1.Location = new System.Drawing.Point(465, 67);
-            this.qqRadioButton1.Name = "qqRadioButton1";
-            this.qqRadioButton1.Size = new System.Drawing.Size(74, 21);
-            this.qqRadioButton1.TabIndex = 29;
-            this.qqRadioButton1.TabStop = true;
-            this.qqRadioButton1.Text = "自动更新";
-            this.qqRadioButton1.UseVisualStyleBackColor = false;
-            // 
-            // qqGlassButton1
-            // 
-            this.qqGlassButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.qqGlassButton1.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.qqGlassButton1, CCWin.SkinControl.DecorationType.None);
-            this.qqGlassButton1.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.qqGlassButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.qqGlassButton1.Image = ((System.Drawing.Image)(resources.GetObject("qqGlassButton1.Image")));
-            this.qqGlassButton1.Location = new System.Drawing.Point(1125, 0);
-            this.qqGlassButton1.Name = "qqGlassButton1";
-            this.qqGlassButton1.Size = new System.Drawing.Size(58, 23);
-            this.qqGlassButton1.TabIndex = 32;
-            this.qqGlassButton1.TabStop = false;
-            this.qqGlassButton1.Text = "设置";
-            this.qqGlassButton1.ToolTipText = "系统设置";
-            // 
-            // imageButtonNext
-            // 
-            this.imageButtonNext.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButtonNext, CCWin.SkinControl.DecorationType.None);
-            this.imageButtonNext.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButtonNext.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonNext.DownImage")));
-            this.imageButtonNext.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonNext.HoverImage")));
-            this.imageButtonNext.Location = new System.Drawing.Point(696, 16);
-            this.imageButtonNext.Name = "imageButtonNext";
-            this.imageButtonNext.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonNext.NormalImage")));
-            this.imageButtonNext.Size = new System.Drawing.Size(34, 30);
-            this.imageButtonNext.TabIndex = 43;
-            this.imageButtonNext.TabStop = false;
-            this.imageButtonNext.ToolTipText = "下一首";
-            this.imageButtonNext.Click += new System.EventHandler(this.imageButtonNext_Click);
-            // 
-            // imageButtonplayAndPause
-            // 
-            this.imageButtonplayAndPause.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButtonplayAndPause, CCWin.SkinControl.DecorationType.None);
-            this.imageButtonplayAndPause.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButtonplayAndPause.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonplayAndPause.DownImage")));
-            this.imageButtonplayAndPause.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonplayAndPause.HoverImage")));
-            this.imageButtonplayAndPause.Location = new System.Drawing.Point(739, 16);
-            this.imageButtonplayAndPause.Name = "imageButtonplayAndPause";
-            this.imageButtonplayAndPause.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonplayAndPause.NormalImage")));
-            this.imageButtonplayAndPause.Size = new System.Drawing.Size(46, 30);
-            this.imageButtonplayAndPause.TabIndex = 42;
-            this.imageButtonplayAndPause.TabStop = false;
-            this.imageButtonplayAndPause.ToolTipText = "播放";
-            // 
-            // imageButtonPrev
-            // 
-            this.imageButtonPrev.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButtonPrev, CCWin.SkinControl.DecorationType.None);
-            this.imageButtonPrev.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButtonPrev.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonPrev.DownImage")));
-            this.imageButtonPrev.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonPrev.HoverImage")));
-            this.imageButtonPrev.Location = new System.Drawing.Point(653, 16);
-            this.imageButtonPrev.Name = "imageButtonPrev";
-            this.imageButtonPrev.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonPrev.NormalImage")));
-            this.imageButtonPrev.Size = new System.Drawing.Size(34, 30);
-            this.imageButtonPrev.TabIndex = 41;
-            this.imageButtonPrev.TabStop = false;
-            this.imageButtonPrev.ToolTipText = "上一首";
-            // 
-            // imageButtonStop
-            // 
-            this.imageButtonStop.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButtonStop, CCWin.SkinControl.DecorationType.None);
-            this.imageButtonStop.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButtonStop.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonStop.DownImage")));
-            this.imageButtonStop.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonStop.HoverImage")));
-            this.imageButtonStop.Location = new System.Drawing.Point(610, 16);
-            this.imageButtonStop.Name = "imageButtonStop";
-            this.imageButtonStop.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonStop.NormalImage")));
-            this.imageButtonStop.Size = new System.Drawing.Size(34, 30);
-            this.imageButtonStop.TabIndex = 40;
-            this.imageButtonStop.TabStop = false;
-            this.imageButtonStop.ToolTipText = "停止";
-            // 
-            // imageButton4
-            // 
-            this.imageButton4.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButton4, CCWin.SkinControl.DecorationType.None);
-            this.imageButton4.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButton4.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton4.DownImage")));
-            this.imageButton4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.imageButton4.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton4.HoverImage")));
-            this.imageButton4.Location = new System.Drawing.Point(244, 32);
-            this.imageButton4.Name = "imageButton4";
-            this.imageButton4.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton4.NormalImage")));
-            this.imageButton4.Size = new System.Drawing.Size(99, 35);
-            this.imageButton4.TabIndex = 39;
-            this.imageButton4.TabStop = false;
-            this.imageButton4.Text = "稍后再说";
-            this.imageButton4.ToolTipText = null;
-            // 
-            // imageButton3
-            // 
-            this.imageButton3.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButton3, CCWin.SkinControl.DecorationType.None);
-            this.imageButton3.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButton3.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.DownImage")));
-            this.imageButton3.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.HoverImage")));
-            this.imageButton3.Location = new System.Drawing.Point(810, 24);
-            this.imageButton3.Name = "imageButton3";
-            this.imageButton3.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.NormalImage")));
-            this.imageButton3.Size = new System.Drawing.Size(26, 22);
-            this.imageButton3.TabIndex = 38;
-            this.imageButton3.TabStop = false;
-            this.imageButton3.ToolTipText = "上移";
-            // 
-            // imageButton2
-            // 
-            this.imageButton2.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButton2, CCWin.SkinControl.DecorationType.None);
-            this.imageButton2.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButton2.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.DownImage")));
-            this.imageButton2.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.HoverImage")));
-            this.imageButton2.Location = new System.Drawing.Point(100, 32);
-            this.imageButton2.Name = "imageButton2";
-            this.imageButton2.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.NormalImage")));
-            this.imageButton2.Size = new System.Drawing.Size(98, 38);
-            this.imageButton2.TabIndex = 37;
-            this.imageButton2.TabStop = false;
-            this.imageButton2.ToolTipText = "一键修复3";
-            // 
-            // imageButton1
-            // 
-            this.imageButton1.BackColor = System.Drawing.Color.Transparent;
-            this.animator.SetDecoration(this.imageButton1, CCWin.SkinControl.DecorationType.None);
-            this.imageButton1.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.imageButton1.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.DownImage")));
-            this.imageButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.imageButton1.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.HoverImage")));
-            this.imageButton1.Location = new System.Drawing.Point(100, 90);
-            this.imageButton1.Name = "imageButton1";
-            this.imageButton1.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.NormalImage")));
-            this.imageButton1.Size = new System.Drawing.Size(82, 24);
-            this.imageButton1.TabIndex = 36;
-            this.imageButton1.TabStop = false;
-            this.imageButton1.Text = "禁止启动";
-            this.imageButton1.ToolTipText = null;
+            this.btnconfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnconfig.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.btnconfig, CCWin.SkinControl.DecorationType.None);
+            this.btnconfig.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnconfig.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.btnconfig.Image = ((System.Drawing.Image)(resources.GetObject("btnconfig.Image")));
+            this.btnconfig.Location = new System.Drawing.Point(1125, 0);
+            this.btnconfig.Name = "btnconfig";
+            this.btnconfig.Size = new System.Drawing.Size(58, 23);
+            this.btnconfig.TabIndex = 32;
+            this.btnconfig.TabStop = false;
+            this.btnconfig.Text = "设置";
+            this.btnconfig.ToolTipText = "系统设置";
+            this.btnconfig.Click += new System.EventHandler(this.btnconfig_Click);
             // 
             // animatedTabs1
             // 
@@ -474,7 +266,7 @@
             this.animatedTabs1.Controls.Add(this.tabPage6);
             this.animator.SetDecoration(this.animatedTabs1, CCWin.SkinControl.DecorationType.None);
             this.animatedTabs1.ItemSize = new System.Drawing.Size(120, 40);
-            this.animatedTabs1.Location = new System.Drawing.Point(270, 39);
+            this.animatedTabs1.Location = new System.Drawing.Point(265, 31);
             this.animatedTabs1.Name = "animatedTabs1";
             this.animatedTabs1.PageArrowDown = ((System.Drawing.Image)(resources.GetObject("animatedTabs1.PageArrowDown")));
             this.animatedTabs1.PageArrowHover = ((System.Drawing.Image)(resources.GetObject("animatedTabs1.PageArrowHover")));
@@ -488,9 +280,13 @@
             this.animatedTabs1.Size = new System.Drawing.Size(966, 677);
             this.animatedTabs1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.animatedTabs1.TabIndex = 44;
+            this.animatedTabs1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.animatedTabs1_Selecting);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.labelLaneNo);
+            this.tabPage1.Controls.Add(this.btnInBlack);
+            this.tabPage1.Controls.Add(this.btnInWhite);
             this.tabPage1.Controls.Add(this.label26);
             this.tabPage1.Controls.Add(this.isOpenStoptype);
             this.tabPage1.Controls.Add(this.label11);
@@ -515,6 +311,57 @@
             this.tabPage1.Text = "稽查主界面";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // labelLaneNo
+            // 
+            this.labelLaneNo.AutoSize = true;
+            this.animator.SetDecoration(this.labelLaneNo, CCWin.SkinControl.DecorationType.None);
+            this.labelLaneNo.Font = new System.Drawing.Font("华文行楷", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLaneNo.Location = new System.Drawing.Point(422, 5);
+            this.labelLaneNo.Name = "labelLaneNo";
+            this.labelLaneNo.Size = new System.Drawing.Size(87, 25);
+            this.labelLaneNo.TabIndex = 85;
+            this.labelLaneNo.Text = "车道：";
+            // 
+            // btnInBlack
+            // 
+            this.btnInBlack.BackColor = System.Drawing.Color.DarkGray;
+            this.btnInBlack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator.SetDecoration(this.btnInBlack, CCWin.SkinControl.DecorationType.None);
+            this.btnInBlack.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnInBlack.DownImage = null;
+            this.btnInBlack.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnInBlack.HoverImage = ((System.Drawing.Image)(resources.GetObject("btnInBlack.HoverImage")));
+            this.btnInBlack.Location = new System.Drawing.Point(811, 111);
+            this.btnInBlack.Name = "btnInBlack";
+            this.btnInBlack.NormalImage = null;
+            this.btnInBlack.Size = new System.Drawing.Size(116, 32);
+            this.btnInBlack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnInBlack.TabIndex = 84;
+            this.btnInBlack.TabStop = false;
+            this.btnInBlack.Text = "列入黑名单";
+            this.btnInBlack.ToolTipText = null;
+            this.btnInBlack.Click += new System.EventHandler(this.btnInBlack_Click);
+            // 
+            // btnInWhite
+            // 
+            this.btnInWhite.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnInWhite.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.animator.SetDecoration(this.btnInWhite, CCWin.SkinControl.DecorationType.None);
+            this.btnInWhite.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnInWhite.DownImage = null;
+            this.btnInWhite.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnInWhite.HoverImage = ((System.Drawing.Image)(resources.GetObject("btnInWhite.HoverImage")));
+            this.btnInWhite.Location = new System.Drawing.Point(684, 111);
+            this.btnInWhite.Name = "btnInWhite";
+            this.btnInWhite.NormalImage = null;
+            this.btnInWhite.Size = new System.Drawing.Size(116, 32);
+            this.btnInWhite.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnInWhite.TabIndex = 83;
+            this.btnInWhite.TabStop = false;
+            this.btnInWhite.Text = "列入白名单";
+            this.btnInWhite.ToolTipText = null;
+            this.btnInWhite.Click += new System.EventHandler(this.btnInWhite_Click);
+            // 
             // label26
             // 
             this.animator.SetDecoration(this.label26, CCWin.SkinControl.DecorationType.None);
@@ -528,7 +375,7 @@
             // isOpenStoptype
             // 
             this.isOpenStoptype.BackColor = System.Drawing.Color.Transparent;
-            this.isOpenStoptype.Checked = false;
+            this.isOpenStoptype.Checked = true;
             this.isOpenStoptype.CheckStyleX = ETCF.CheckStyle.style2;
             this.isOpenStoptype.Cursor = System.Windows.Forms.Cursors.Hand;
             this.animator.SetDecoration(this.isOpenStoptype, CCWin.SkinControl.DecorationType.None);
@@ -541,7 +388,7 @@
             // 
             this.animator.SetDecoration(this.label11, CCWin.SkinControl.DecorationType.None);
             this.label11.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(678, 113);
+            this.label11.Location = new System.Drawing.Point(678, 14);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(143, 32);
             this.label11.TabIndex = 62;
@@ -551,7 +398,7 @@
             // 
             this.animator.SetDecoration(this.labelNum, CCWin.SkinControl.DecorationType.None);
             this.labelNum.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelNum.Location = new System.Drawing.Point(849, 113);
+            this.labelNum.Location = new System.Drawing.Point(827, 9);
             this.labelNum.Name = "labelNum";
             this.labelNum.Size = new System.Drawing.Size(100, 32);
             this.labelNum.TabIndex = 60;
@@ -709,26 +556,28 @@
             this.dataGridViewRoll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewRoll.Size = new System.Drawing.Size(955, 602);
             this.dataGridViewRoll.TabIndex = 21;
+            this.dataGridViewRoll.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoll_CellContentDoubleClick);
             // 
             // Column11
             // 
             this.Column11.HeaderText = "序号";
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
+            this.Column11.Width = 70;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "检测车型";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
-            this.Column2.Width = 65;
+            this.Column2.Width = 80;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "OBU车型";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
-            this.Column5.Width = 65;
+            this.Column5.Width = 80;
             // 
             // Column4
             // 
@@ -919,6 +768,7 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(946, 604);
             this.dataGridView1.TabIndex = 42;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1027,7 +877,7 @@
             // OpenForce
             // 
             this.OpenForce.BackColor = System.Drawing.Color.Transparent;
-            this.OpenForce.Checked = false;
+            this.OpenForce.Checked = true;
             this.OpenForce.CheckStyleX = ETCF.CheckStyle.style2;
             this.OpenForce.Cursor = System.Windows.Forms.Cursors.Hand;
             this.animator.SetDecoration(this.OpenForce, CCWin.SkinControl.DecorationType.None);
@@ -1398,6 +1248,222 @@
             this.tabPage5.Text = "其他";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // imageButton4
+            // 
+            this.imageButton4.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButton4, CCWin.SkinControl.DecorationType.None);
+            this.imageButton4.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButton4.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton4.DownImage")));
+            this.imageButton4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.imageButton4.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton4.HoverImage")));
+            this.imageButton4.Location = new System.Drawing.Point(244, 32);
+            this.imageButton4.Name = "imageButton4";
+            this.imageButton4.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton4.NormalImage")));
+            this.imageButton4.Size = new System.Drawing.Size(99, 35);
+            this.imageButton4.TabIndex = 39;
+            this.imageButton4.TabStop = false;
+            this.imageButton4.Text = "稍后再说";
+            this.imageButton4.ToolTipText = null;
+            // 
+            // imageButtonNext
+            // 
+            this.imageButtonNext.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButtonNext, CCWin.SkinControl.DecorationType.None);
+            this.imageButtonNext.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButtonNext.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonNext.DownImage")));
+            this.imageButtonNext.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonNext.HoverImage")));
+            this.imageButtonNext.Location = new System.Drawing.Point(696, 16);
+            this.imageButtonNext.Name = "imageButtonNext";
+            this.imageButtonNext.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonNext.NormalImage")));
+            this.imageButtonNext.Size = new System.Drawing.Size(34, 30);
+            this.imageButtonNext.TabIndex = 43;
+            this.imageButtonNext.TabStop = false;
+            this.imageButtonNext.ToolTipText = "下一首";
+            this.imageButtonNext.Click += new System.EventHandler(this.imageButtonNext_Click);
+            // 
+            // qqRadioButton1
+            // 
+            this.qqRadioButton1.AutoSize = true;
+            this.qqRadioButton1.BackColor = System.Drawing.Color.Transparent;
+            this.qqRadioButton1.Checked = true;
+            this.animator.SetDecoration(this.qqRadioButton1, CCWin.SkinControl.DecorationType.None);
+            this.qqRadioButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.qqRadioButton1.Location = new System.Drawing.Point(465, 67);
+            this.qqRadioButton1.Name = "qqRadioButton1";
+            this.qqRadioButton1.Size = new System.Drawing.Size(74, 21);
+            this.qqRadioButton1.TabIndex = 29;
+            this.qqRadioButton1.TabStop = true;
+            this.qqRadioButton1.Text = "自动更新";
+            this.qqRadioButton1.UseVisualStyleBackColor = false;
+            // 
+            // imageButton2
+            // 
+            this.imageButton2.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButton2, CCWin.SkinControl.DecorationType.None);
+            this.imageButton2.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButton2.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.DownImage")));
+            this.imageButton2.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.HoverImage")));
+            this.imageButton2.Location = new System.Drawing.Point(100, 32);
+            this.imageButton2.Name = "imageButton2";
+            this.imageButton2.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton2.NormalImage")));
+            this.imageButton2.Size = new System.Drawing.Size(98, 38);
+            this.imageButton2.TabIndex = 37;
+            this.imageButton2.TabStop = false;
+            this.imageButton2.ToolTipText = "一键修复3";
+            // 
+            // qqButton3
+            // 
+            this.animator.SetDecoration(this.qqButton3, CCWin.SkinControl.DecorationType.None);
+            this.qqButton3.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.qqButton3.Image = ((System.Drawing.Image)(resources.GetObject("qqButton3.Image")));
+            this.qqButton3.Location = new System.Drawing.Point(610, 111);
+            this.qqButton3.Name = "qqButton3";
+            this.qqButton3.Size = new System.Drawing.Size(68, 23);
+            this.qqButton3.TabIndex = 21;
+            this.qqButton3.Text = "删除";
+            this.qqButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.qqButton3.UseVisualStyleBackColor = true;
+            this.qqButton3.Click += new System.EventHandler(this.qqButton3_Click);
+            // 
+            // imageButtonplayAndPause
+            // 
+            this.imageButtonplayAndPause.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButtonplayAndPause, CCWin.SkinControl.DecorationType.None);
+            this.imageButtonplayAndPause.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButtonplayAndPause.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonplayAndPause.DownImage")));
+            this.imageButtonplayAndPause.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonplayAndPause.HoverImage")));
+            this.imageButtonplayAndPause.Location = new System.Drawing.Point(739, 16);
+            this.imageButtonplayAndPause.Name = "imageButtonplayAndPause";
+            this.imageButtonplayAndPause.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonplayAndPause.NormalImage")));
+            this.imageButtonplayAndPause.Size = new System.Drawing.Size(46, 30);
+            this.imageButtonplayAndPause.TabIndex = 42;
+            this.imageButtonplayAndPause.TabStop = false;
+            this.imageButtonplayAndPause.ToolTipText = "播放";
+            // 
+            // qqTextBox2
+            // 
+            this.qqTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.animator.SetDecoration(this.qqTextBox2, CCWin.SkinControl.DecorationType.None);
+            this.qqTextBox2.EmptyTextTip = "这个是有水印的QQTextBox";
+            this.qqTextBox2.EmptyTextTipColor = System.Drawing.Color.DarkGray;
+            this.qqTextBox2.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.qqTextBox2.Location = new System.Drawing.Point(610, 82);
+            this.qqTextBox2.Name = "qqTextBox2";
+            this.qqTextBox2.Size = new System.Drawing.Size(213, 23);
+            this.qqTextBox2.TabIndex = 4;
+            // 
+            // imageButtonPrev
+            // 
+            this.imageButtonPrev.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButtonPrev, CCWin.SkinControl.DecorationType.None);
+            this.imageButtonPrev.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButtonPrev.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonPrev.DownImage")));
+            this.imageButtonPrev.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonPrev.HoverImage")));
+            this.imageButtonPrev.Location = new System.Drawing.Point(653, 16);
+            this.imageButtonPrev.Name = "imageButtonPrev";
+            this.imageButtonPrev.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonPrev.NormalImage")));
+            this.imageButtonPrev.Size = new System.Drawing.Size(34, 30);
+            this.imageButtonPrev.TabIndex = 41;
+            this.imageButtonPrev.TabStop = false;
+            this.imageButtonPrev.ToolTipText = "上一首";
+            // 
+            // imageButton1
+            // 
+            this.imageButton1.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButton1, CCWin.SkinControl.DecorationType.None);
+            this.imageButton1.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButton1.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.DownImage")));
+            this.imageButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.imageButton1.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.HoverImage")));
+            this.imageButton1.Location = new System.Drawing.Point(100, 90);
+            this.imageButton1.Name = "imageButton1";
+            this.imageButton1.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton1.NormalImage")));
+            this.imageButton1.Size = new System.Drawing.Size(82, 24);
+            this.imageButton1.TabIndex = 36;
+            this.imageButton1.TabStop = false;
+            this.imageButton1.Text = "禁止启动";
+            this.imageButton1.ToolTipText = null;
+            // 
+            // imageButtonStop
+            // 
+            this.imageButtonStop.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButtonStop, CCWin.SkinControl.DecorationType.None);
+            this.imageButtonStop.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButtonStop.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButtonStop.DownImage")));
+            this.imageButtonStop.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButtonStop.HoverImage")));
+            this.imageButtonStop.Location = new System.Drawing.Point(610, 16);
+            this.imageButtonStop.Name = "imageButtonStop";
+            this.imageButtonStop.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButtonStop.NormalImage")));
+            this.imageButtonStop.Size = new System.Drawing.Size(34, 30);
+            this.imageButtonStop.TabIndex = 40;
+            this.imageButtonStop.TabStop = false;
+            this.imageButtonStop.ToolTipText = "停止";
+            // 
+            // qqButton6
+            // 
+            this.animator.SetDecoration(this.qqButton6, CCWin.SkinControl.DecorationType.None);
+            this.qqButton6.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.qqButton6.Location = new System.Drawing.Point(792, 599);
+            this.qqButton6.Name = "qqButton6";
+            this.qqButton6.Size = new System.Drawing.Size(68, 23);
+            this.qqButton6.TabIndex = 24;
+            this.qqButton6.Text = "确定";
+            this.qqButton6.UseVisualStyleBackColor = true;
+            // 
+            // imageButton3
+            // 
+            this.imageButton3.BackColor = System.Drawing.Color.Transparent;
+            this.animator.SetDecoration(this.imageButton3, CCWin.SkinControl.DecorationType.None);
+            this.imageButton3.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.imageButton3.DownImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.DownImage")));
+            this.imageButton3.HoverImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.HoverImage")));
+            this.imageButton3.Location = new System.Drawing.Point(810, 24);
+            this.imageButton3.Name = "imageButton3";
+            this.imageButton3.NormalImage = ((System.Drawing.Image)(resources.GetObject("imageButton3.NormalImage")));
+            this.imageButton3.Size = new System.Drawing.Size(26, 22);
+            this.imageButton3.TabIndex = 38;
+            this.imageButton3.TabStop = false;
+            this.imageButton3.ToolTipText = "上移";
+            // 
+            // qqButton1
+            // 
+            this.animator.SetDecoration(this.qqButton1, CCWin.SkinControl.DecorationType.None);
+            this.qqButton1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.qqButton1.Image = ((System.Drawing.Image)(resources.GetObject("qqButton1.Image")));
+            this.qqButton1.Location = new System.Drawing.Point(865, 6);
+            this.qqButton1.Name = "qqButton1";
+            this.qqButton1.Size = new System.Drawing.Size(63, 61);
+            this.qqButton1.TabIndex = 19;
+            this.qqButton1.Text = "修改";
+            this.qqButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.qqButton1.UseVisualStyleBackColor = true;
+            this.qqButton1.Click += new System.EventHandler(this.qqButton1_Click);
+            // 
+            // qqButton7
+            // 
+            this.animator.SetDecoration(this.qqButton7, CCWin.SkinControl.DecorationType.None);
+            this.qqButton7.Enabled = false;
+            this.qqButton7.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.qqButton7.Location = new System.Drawing.Point(869, 599);
+            this.qqButton7.Name = "qqButton7";
+            this.qqButton7.Size = new System.Drawing.Size(68, 23);
+            this.qqButton7.TabIndex = 25;
+            this.qqButton7.Text = "禁止";
+            this.qqButton7.UseVisualStyleBackColor = true;
+            // 
+            // qqButton4
+            // 
+            this.animator.SetDecoration(this.qqButton4, CCWin.SkinControl.DecorationType.None);
+            this.qqButton4.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.qqButton4.Image = ((System.Drawing.Image)(resources.GetObject("qqButton4.Image")));
+            this.qqButton4.Location = new System.Drawing.Point(377, 32);
+            this.qqButton4.Name = "qqButton4";
+            this.qqButton4.Size = new System.Drawing.Size(68, 56);
+            this.qqButton4.TabIndex = 22;
+            this.qqButton4.Text = "更新";
+            this.qqButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.qqButton4.UseVisualStyleBackColor = true;
+            // 
             // tabPage6
             // 
             this.animator.SetDecoration(this.tabPage6, CCWin.SkinControl.DecorationType.None);
@@ -1567,26 +1633,20 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.animatedTabs1);
-            this.Controls.Add(this.qqGlassButton1);
+            this.Controls.Add(this.btnconfig);
             this.animator.SetDecoration(this, CCWin.SkinControl.DecorationType.None);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "FormDemo";
-            this.Text = "软件demo";
+            this.Text = "防作弊软件v1.2";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormDemo_FormClosed);
             this.Load += new System.EventHandler(this.FormDemo_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.qqGlassButton1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonNext)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonplayAndPause)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonPrev)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButtonStop)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnconfig)).EndInit();
             this.animatedTabs1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInBlack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnInWhite)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxVeh)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoll)).EndInit();
@@ -1605,6 +1665,14 @@
             this.groupBox4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonNext)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonplayAndPause)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonPrev)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButtonStop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageButton3)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCam)).EndInit();
@@ -1618,30 +1686,13 @@
 
         #endregion
 
-        private ControlExs.QQTextBox qqTextBox2;
-        private ControlExs.QQButton qqButton4;
-        private ControlExs.QQButton qqButton3;
         private ControlExs.QQButton querybutton;
-        private ControlExs.QQButton qqButton1;
-        private ControlExs.QQButton qqButton6;
-        private ControlExs.QQButton qqButton7;
         private ControlExs.QQCheckBox checkBox1;
-        private ControlExs.QQRadioButton qqRadioButton1;
-        private ControlExs.QQGlassButton qqGlassButton1;
-        private ControlExs.ImageButton imageButtonNext;
-        private ControlExs.ImageButton imageButtonplayAndPause;
-        private ControlExs.ImageButton imageButtonPrev;
-        private ControlExs.ImageButton imageButtonStop;
-        private ControlExs.ImageButton imageButton4;
-        private ControlExs.ImageButton imageButton3;
-        private ControlExs.ImageButton imageButton2;
-        private ControlExs.ImageButton imageButton1;
+        private ControlExs.QQGlassButton btnconfig;
         private CCWin.SkinControl.SkinTabControl animatedTabs1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.DateTimePicker dateEndTime;
         private System.Windows.Forms.Label endTime;
         private System.Windows.Forms.DateTimePicker dateStartTime;
@@ -1649,21 +1700,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private ControlExs.QQButton button1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataGridView dataGridViewRoll;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBoxCam;
         private System.Windows.Forms.PictureBox pictureBoxJG;
@@ -1675,18 +1711,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox controltext;
         private CCWin.SkinControl.SkinAnimator animator;
-        private System.Windows.Forms.PictureBox pictureBoxVeh;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label labelJGCarType;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelOBUCarType;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label labelCamPlateNum;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label labelOBUPlateNum;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label labelNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -1733,8 +1757,55 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TabPage tabPage5;
+        private ControlExs.ImageButton imageButton4;
+        private ControlExs.ImageButton imageButtonNext;
+        private ControlExs.QQRadioButton qqRadioButton1;
+        private ControlExs.ImageButton imageButton2;
+        private ControlExs.QQButton qqButton3;
+        private ControlExs.ImageButton imageButtonplayAndPause;
+        private ControlExs.QQTextBox qqTextBox2;
+        private ControlExs.ImageButton imageButtonPrev;
+        private ControlExs.ImageButton imageButton1;
+        private ControlExs.ImageButton imageButtonStop;
+        private ControlExs.QQButton qqButton6;
+        private ControlExs.ImageButton imageButton3;
+        private ControlExs.QQButton qqButton1;
+        private ControlExs.QQButton qqButton7;
+        private ControlExs.QQButton qqButton4;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label26;
         public myButtonCheck isOpenStoptype;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelNum;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelJGCarType;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelOBUCarType;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelCamPlateNum;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelOBUPlateNum;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBoxVeh;
+        private ControlExs.ImageButton btnInBlack;
+        private ControlExs.ImageButton btnInWhite;
+        private System.Windows.Forms.Label labelLaneNo;
+        private System.Windows.Forms.DataGridView dataGridViewRoll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
 
 
 

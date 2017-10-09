@@ -71,3 +71,5 @@ E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.FormDemo.resources
 E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.myButtonCheck.resources
 E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.Properties.Resources.resources
 E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.csproj.GenerateResource.Cache
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.frmLogin.resources
+E:\GitHubHome\ETCG_hebei\Demo\obj\x86\Debug\ETCF.GridDouclickShowPicDialog.resources
